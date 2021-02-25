@@ -1,12 +1,19 @@
 package com.emikhalets.moviesapp.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.emikhalets.moviesapp.R
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import com.emikhalets.moviesapp.databinding.ActivityMainBinding
+import com.emikhalets.moviesapp.viewmodel.ActivityViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private val activityViewModel: ActivityViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }
