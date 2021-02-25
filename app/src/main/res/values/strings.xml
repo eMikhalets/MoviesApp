@@ -1,14 +1,18 @@
 <resources>
     <string name="app_name">MoviesApp</string>
 
-    <string name="movies_text_movies_label">Movies list</string>
-    <string name="movies_text_no_internet">No Internet connection</string>
-
-    <string name="movie_item_text_reviews">%d reviews</string>
-    <string name="movie_item_text_time">%d min</string>
-
     <string name="details_text_back">Back</string>
     <string name="details_text_reviews">%d reviews</string>
     <string name="details_text_story">Storyline</string>
     <string name="details_text_cast">Cast</string>
+
+    <string name="home_text_no_internet">No Internet connection</string>
+    <string name="home_label_discover_movies">Discover movies in The Movie DataBase</string>
+    <string name="home_hint_search">Search by movie name</string>
+    <string name="home_text_show_all">See all</string>
+    <string name="home_label_popular_artists">Popular Artists</string>
+    <string name="home_label_popular_movies">Now Playing Movies</string>
+    <string name="home_label_playing_movies">Now Playing Movies</string>
+    <string name="home_label_top_movies">Top Rated Movies</string>
+    <string name="home_label_upcoming_movies">Upcoming Movies</string>
 </resources>

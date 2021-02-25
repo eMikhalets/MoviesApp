@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MoviesApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.MoviesApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -14,17 +14,26 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="RatingBar">
-        <item name="android:isIndicator">true</item>
-        <item name="android:numStars">5</item>
-        <item name="android:stepSize">2</item>
+    <style name="Home" />
+
+    <style name="Home.Text" />
+
+    <style name="Home.Text.MainLabel">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="PgView">
-        <item name="android:background">@drawable/bg_pg</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">12sp</item>
+    <style name="Home.Text.BlockLabel">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Home.Text.BlockShowAll">
+        <item name="android:gravity">end</item>
+        <item name="android:textColor">@color/home_text_show_all</item>
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

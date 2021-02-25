@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/text_discover_movies"
+            style="@style/Home.Text.MainLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/home_label_discover_movies"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_discover_movies">
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:queryHint="@string/home_hint_search" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/text_pop_artists_label"
+            style="@style/Home.Text.BlockLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/home_list_block_margin_top"
+            android:layout_marginEnd="8dp"
+            android:text="@string/home_label_popular_artists"
+            app:layout_constraintEnd_toStartOf="@+id/text_pop_artists_all"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_search" />
+
+        <TextView
+            android:id="@+id/text_pop_artists_all"
+            style="@style/Home.Text.BlockShowAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/home_text_show_all"
+            app:layout_constraintBottom_toBottomOf="@+id/text_pop_artists_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_pop_artists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_pop_artists_label"
+            tools:itemCount="7"
+            tools:listitem="@layout/item_artist" />
+
+        <TextView
+            android:id="@+id/text_pop_movies_label"
+            style="@style/Home.Text.BlockLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/home_list_block_margin_top"
+            android:layout_marginEnd="8dp"
+            android:text="@string/home_label_popular_movies"
+            app:layout_constraintEnd_toStartOf="@+id/text_pop_movies_all"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/list_pop_artists" />
+
+        <TextView
+            android:id="@+id/text_pop_movies_all"
+            style="@style/Home.Text.BlockShowAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/home_text_show_all"
+            app:layout_constraintBottom_toBottomOf="@+id/text_pop_movies_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_pop_movies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_pop_movies_label"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_movie" />
+
+        <TextView
+            android:id="@+id/text_playing_movies_label"
+            style="@style/Home.Text.BlockLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/home_list_block_margin_top"
+            android:layout_marginEnd="8dp"
+            android:text="@string/home_label_playing_movies"
+            app:layout_constraintEnd_toStartOf="@+id/text_playing_movies_all"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/list_pop_movies" />
+
+        <TextView
+            android:id="@+id/text_playing_movies_all"
+            style="@style/Home.Text.BlockShowAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/home_text_show_all"
+            app:layout_constraintBottom_toBottomOf="@+id/text_playing_movies_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_playing_movies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_playing_movies_label"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_movie" />
+
+        <TextView
+            android:id="@+id/text_top_movies_label"
+            style="@style/Home.Text.BlockLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/home_list_block_margin_top"
+            android:layout_marginEnd="8dp"
+            android:text="@string/home_label_top_movies"
+            app:layout_constraintEnd_toStartOf="@+id/text_top_movies_all"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/list_playing_movies" />
+
+        <TextView
+            android:id="@+id/text_top_movies_all"
+            style="@style/Home.Text.BlockShowAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/home_text_show_all"
+            app:layout_constraintBottom_toBottomOf="@+id/text_top_movies_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_top_movies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_top_movies_label"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_movie" />
+
+        <TextView
+            android:id="@+id/text_upcoming_movies_label"
+            style="@style/Home.Text.BlockLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/home_list_block_margin_top"
+            android:layout_marginEnd="8dp"
+            android:text="@string/home_label_upcoming_movies"
+            app:layout_constraintEnd_toStartOf="@+id/text_upcoming_movies_all"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/list_top_movies" />
+
+        <TextView
+            android:id="@+id/text_upcoming_movies_all"
+            style="@style/Home.Text.BlockShowAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/home_text_show_all"
+            app:layout_constraintBottom_toBottomOf="@+id/text_upcoming_movies_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_upcoming_movies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_upcoming_movies_label"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_movie" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

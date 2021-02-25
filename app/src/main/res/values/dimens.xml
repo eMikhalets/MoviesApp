@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="pg_size">24dp</dimen>
-    <dimen name="actor_size">80dp</dimen>
-    <dimen name="backdrop_height">300dp</dimen>
+    <dimen name="home_list_block_margin_top">8dp</dimen>
 </resources>

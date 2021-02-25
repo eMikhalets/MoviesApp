@@ -8,8 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="background">#191926</color>
-    <color name="backgroundOpacity">#00191926</color>
+    <color name="background">#f5f5f5</color>
+    <color name="home_text_show_all">#0000FF</color>
     <color name="veryLightGray">#ECECEC</color>
     <color name="lightGray">#6D6D80</color>
     <color name="gray">#a6a6a6</color>
