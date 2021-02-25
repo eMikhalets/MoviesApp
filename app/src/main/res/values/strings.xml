@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">MoviesApp</string>
+
+    <string name="movies_text_movies_label">Movies list</string>
+    <string name="movies_text_no_internet">No Internet connection</string>
+
+    <string name="movie_item_text_reviews">%d reviews</string>
+    <string name="movie_item_text_time">%d min</string>
+
+    <string name="details_text_back">Back</string>
+    <string name="details_text_reviews">%d reviews</string>
+    <string name="details_text_story">Storyline</string>
+    <string name="details_text_cast">Cast</string>
 </resources>
