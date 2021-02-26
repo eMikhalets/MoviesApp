@@ -7,6 +7,5 @@
         android:centerColor="@color/background"
         android:centerY="0.87"
         android:endColor="@color/background"
-        android:startColor="@color/backgroundOpacity"
         android:type="linear" />
 </shape>

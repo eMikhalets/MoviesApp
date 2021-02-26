@@ -11,6 +11,7 @@ import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -30,10 +31,8 @@ class NetworkRequestTest {
     @Before
     fun setUp() {
         val json = Json {
-            coerceInputValues = true
             prettyPrint = true
             ignoreUnknownKeys = true
-            this.isLenient = isLenient
         }
         val client = OkHttpClient.Builder()
             .connectTimeout(1, TimeUnit.SECONDS)
@@ -57,17 +56,53 @@ class NetworkRequestTest {
     fun configurationRequestTest() {
         mockWebServer.enqueueResponse("configuration.json", HttpURLConnection.HTTP_OK)
         runBlocking {
-            val configuration = ConfigurationResponse(
-                ConfigurationImagesResponse(
-                    listOf("w300", "w780", "w1280", "original"),
-                    listOf("w92", "w154", "w185", "w342", "w500", "w780", "original"),
-                    listOf("w45", "w185", "h632", "original"),
-                    "http://image.tmdb.org/t/p/",
-                    "https://image.tmdb.org/t/p/"
-                )
-            )
             val response = apiService.configuration()
-            assertEquals(configuration.toString(), response.toString())
+            assertNotNull(response)
+        }
+    }
+
+    @Test
+    fun moviesNowPlayingRequestTest() {
+        mockWebServer.enqueueResponse("movies_list.json", HttpURLConnection.HTTP_OK)
+        runBlocking {
+            val response = apiService.movieNowPlaying()
+            assertNotNull(response)
+        }
+    }
+
+    @Test
+    fun moviePopularRequestTest() {
+        mockWebServer.enqueueResponse("movies_list.json", HttpURLConnection.HTTP_OK)
+        runBlocking {
+            val response = apiService.moviePopular()
+            assertNotNull(response)
+        }
+    }
+
+    @Test
+    fun movieTopRatedRequestTest() {
+        mockWebServer.enqueueResponse("movies_list.json", HttpURLConnection.HTTP_OK)
+        runBlocking {
+            val response = apiService.movieTopRated()
+            assertNotNull(response)
+        }
+    }
+
+    @Test
+    fun movieUpcomingRequestTest() {
+        mockWebServer.enqueueResponse("movies_list.json", HttpURLConnection.HTTP_OK)
+        runBlocking {
+            val response = apiService.movieUpcoming()
+            assertNotNull(response)
+        }
+    }
+
+    @Test
+    fun personPopularRequestTest() {
+        mockWebServer.enqueueResponse("pop_artists.json", HttpURLConnection.HTTP_OK)
+        runBlocking {
+            val response = apiService.personPopular()
+            assertNotNull(response)
         }
     }
 }

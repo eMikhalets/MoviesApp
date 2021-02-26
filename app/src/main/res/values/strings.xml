@@ -15,4 +15,6 @@
     <string name="home_label_playing_movies">Now Playing Movies</string>
     <string name="home_label_top_movies">Top Rated Movies</string>
     <string name="home_label_upcoming_movies">Upcoming Movies</string>
+
+    <string name="item_movie_text_bottom">%.2f / %s</string>
 </resources>

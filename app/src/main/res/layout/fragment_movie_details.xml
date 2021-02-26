@@ -133,6 +133,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_cast_label"
             tools:itemCount="5"
-            tools:listitem="@layout/item_artist" />
+            tools:listitem="@layout/item_pop_artist" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

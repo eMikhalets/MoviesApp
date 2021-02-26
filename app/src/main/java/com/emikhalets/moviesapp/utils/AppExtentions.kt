@@ -5,37 +5,42 @@ import com.emikhalets.moviesapp.model.network.ApiResult
 /**
  * Builds a url to request backdrop of movie with width = 1280 px
  */
-fun buildBackdropUrl(path: String) = "https://image.tmdb.org/t/p/w1280/$path"
+fun buildBackdropUrl1280px(path: String) = "https://image.tmdb.org/t/p/w1280/$path"
 
 /**
- * Builds a url to request backdrop of movie with width = 780 px
+ * Builds a url to request poster of movie with width = 780 px
  */
-fun buildPosterUrl(path: String) = "https://image.tmdb.org/t/p/w780/$path"
+fun buildPosterUrl780px(path: String) = "https://image.tmdb.org/t/p/w780/$path"
 
 /**
- * Builds a url to request backdrop of movie with width = 632 px
+ * Builds a url to request poster of movie with width = 185 px
  */
-fun buildProfileUrl(path: String) = "https://image.tmdb.org/t/p/w632/$path"
+fun buildPosterUrl185px(path: String) = "https://image.tmdb.org/t/p/w185/$path"
 
 /**
- * Builds a url to request backdrop of movie with width = 185 px
+ * Builds a url to request profile of movie with width = 632 px
  */
-fun buildProfileMiniUrl(path: String) = "https://image.tmdb.org/t/p/w185/$path"
+fun buildProfileUrl632px(path: String) = "https://image.tmdb.org/t/p/w632/$path"
 
 /**
- * Builds a url to request backdrop of movie with width = 300 px
+ * Builds a url to request profile of movie with width = 185 px
  */
-fun buildStillUrl(path: String) = "https://image.tmdb.org/t/p/w300/$path"
+fun buildProfileUrl185px(path: String) = "https://image.tmdb.org/t/p/w185/$path"
 
 /**
- * Builds a url to request backdrop of movie with width = 500 px
+ * Builds a url to request still of movie with width = 300 px
  */
-fun buildLogoUrl(path: String) = "https://image.tmdb.org/t/p/w500/$path"
+fun buildStillUrl300px(path: String) = "https://image.tmdb.org/t/p/w300/$path"
 
 /**
- * Builds a url to request backdrop of movie with width = 185 px
+ * Builds a url to request logo of movie with width = 500 px
  */
-fun buildLogoMiniUrl(path: String) = "https://image.tmdb.org/t/p/w185/$path"
+fun buildLogoUrl500px(path: String) = "https://image.tmdb.org/t/p/w500/$path"
+
+/**
+ * Builds a url to request logo of movie with width = 185 px
+ */
+fun buildLogoUrl185px(path: String) = "https://image.tmdb.org/t/p/w185/$path"
 
 //suspend fun <T> safeDatabaseCall(call: suspend () -> T): DbResult<T> =
 //    try {
