@@ -30,16 +30,21 @@ class HomeViewModel : ViewModel() {
     private val _moviesUpcoming = MutableLiveData<List<MovieListResult>>()
     val moviesUpcoming get(): LiveData<List<MovieListResult>> = _moviesUpcoming
 
+    private val _uiVisibility = MutableLiveData<Boolean>()
+    val uiVisibility get(): LiveData<Boolean> = _uiVisibility
+
     private val _notice = MutableLiveData<String>()
     val notice get(): LiveData<String> = _notice
 
     fun loadData() {
         viewModelScope.launch {
+            _uiVisibility.postValue(false)
             loadPopArtists()
             loadMoviesPopular()
             loadMoviesNowPlaying()
             loadMoviesTopRated()
             loadMoviesUpcoming()
+            _uiVisibility.postValue(true)
         }
     }
 

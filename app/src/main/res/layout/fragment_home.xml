@@ -4,13 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:scrollbars="none">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background"
         android:padding="8dp">
+
+        <ProgressBar
+            android:id="@+id/pb_loading_data"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_search" />
 
         <TextView
             android:id="@+id/text_discover_movies"
@@ -52,10 +62,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/home_list_block_margin_top"
             android:layout_marginEnd="8dp"
+            android:alpha="0"
             android:text="@string/home_label_popular_artists"
             app:layout_constraintEnd_toStartOf="@+id/text_pop_artists_all"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_search" />
+            app:layout_constraintTop_toBottomOf="@+id/card_search"
+            tools:alpha="1" />
 
         <TextView
             android:id="@+id/text_pop_artists_all"
@@ -63,19 +75,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:alpha="0"
             android:text="@string/home_text_show_all"
             app:layout_constraintBottom_toBottomOf="@+id/text_pop_artists_label"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:alpha="1" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_pop_artists"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="140dp"
+            android:alpha="0"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_pop_artists_label"
+            tools:alpha="1"
             tools:itemCount="7"
             tools:listitem="@layout/item_pop_artist" />
 
@@ -87,10 +103,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/home_list_block_margin_top"
             android:layout_marginEnd="8dp"
+            android:alpha="0"
             android:text="@string/home_label_popular_movies"
             app:layout_constraintEnd_toStartOf="@+id/text_pop_movies_all"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/list_pop_artists" />
+            app:layout_constraintTop_toBottomOf="@+id/list_pop_artists"
+            tools:alpha="1" />
 
         <TextView
             android:id="@+id/text_pop_movies_all"
@@ -98,19 +116,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:alpha="0"
             android:text="@string/home_text_show_all"
             app:layout_constraintBottom_toBottomOf="@+id/text_pop_movies_label"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:alpha="1" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_pop_movies"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
+            android:alpha="0"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_pop_movies_label"
+            tools:alpha="1"
             tools:itemCount="6"
             tools:listitem="@layout/item_movie" />
 
@@ -122,10 +144,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/home_list_block_margin_top"
             android:layout_marginEnd="8dp"
+            android:alpha="0"
             android:text="@string/home_label_playing_movies"
             app:layout_constraintEnd_toStartOf="@+id/text_playing_movies_all"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/list_pop_movies" />
+            app:layout_constraintTop_toBottomOf="@+id/list_pop_movies"
+            tools:alpha="1" />
 
         <TextView
             android:id="@+id/text_playing_movies_all"
@@ -133,19 +157,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:alpha="0"
             android:text="@string/home_text_show_all"
             app:layout_constraintBottom_toBottomOf="@+id/text_playing_movies_label"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:alpha="1" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_playing_movies"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
+            android:alpha="0"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_playing_movies_label"
+            tools:alpha="1"
             tools:itemCount="6"
             tools:listitem="@layout/item_movie" />
 
@@ -157,10 +185,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/home_list_block_margin_top"
             android:layout_marginEnd="8dp"
+            android:alpha="0"
             android:text="@string/home_label_top_movies"
             app:layout_constraintEnd_toStartOf="@+id/text_top_movies_all"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/list_playing_movies" />
+            app:layout_constraintTop_toBottomOf="@+id/list_playing_movies"
+            tools:alpha="1" />
 
         <TextView
             android:id="@+id/text_top_movies_all"
@@ -168,19 +198,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:alpha="0"
             android:text="@string/home_text_show_all"
             app:layout_constraintBottom_toBottomOf="@+id/text_top_movies_label"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:alpha="1" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_top_movies"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
+            android:alpha="0"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_top_movies_label"
+            tools:alpha="1"
             tools:itemCount="6"
             tools:listitem="@layout/item_movie" />
 
@@ -192,10 +226,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/home_list_block_margin_top"
             android:layout_marginEnd="8dp"
+            android:alpha="0"
             android:text="@string/home_label_upcoming_movies"
             app:layout_constraintEnd_toStartOf="@+id/text_upcoming_movies_all"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/list_top_movies" />
+            app:layout_constraintTop_toBottomOf="@+id/list_top_movies"
+            tools:alpha="1" />
 
         <TextView
             android:id="@+id/text_upcoming_movies_all"
@@ -203,19 +239,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:alpha="0"
             android:text="@string/home_text_show_all"
             app:layout_constraintBottom_toBottomOf="@+id/text_upcoming_movies_label"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:alpha="1" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_upcoming_movies"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
+            android:alpha="0"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_upcoming_movies_label"
+            tools:alpha="1"
             tools:itemCount="6"
             tools:listitem="@layout/item_movie" />
     </androidx.constraintlayout.widget.ConstraintLayout>

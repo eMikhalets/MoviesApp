@@ -1,5 +1,6 @@
-package com.emikhalets.moviesapp.view
+package com.emikhalets.moviesapp.view.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,34 +12,39 @@ import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.ItemMovieBinding
 import com.emikhalets.moviesapp.model.pojo.MovieListResult
 import com.emikhalets.moviesapp.utils.buildPosterUrl185px
-import com.emikhalets.moviesapp.view.MoviesListAdapter.ViewHolder
+import com.emikhalets.moviesapp.view.home.MoviesListAdapter.ViewHolder
 
-class MoviesListAdapter : ListAdapter<MovieListResult, ViewHolder>(MovieDiffCallback()) {
+class MoviesListAdapter(private val imageCornerRadius: Float) :
+    ListAdapter<MovieListResult, ViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.newInstance(parent)
+        return ViewHolder.newInstance(parent, imageCornerRadius)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: ItemMovieBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(
+        private val binding: ItemMovieBinding,
+        private val imageCornerRadius: Float
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: MovieListResult) {
             with(binding) {
+                Log.d(this.javaClass.name, "movie = '${item.title}'")
                 imagePoster.load(buildPosterUrl185px(item.poster_path)) {
                     crossfade(500)
                     placeholder(R.drawable.ph_actor)
                     fallback(R.drawable.ph_actor)
-                    transformations(RoundedCornersTransformation(8f))
+                    transformations(RoundedCornersTransformation(imageCornerRadius))
                 }
                 textTitle.text = item.title
                 textBottom.text = root.context.getString(
-                        R.string.item_movie_text_bottom,
-                        item.vote_average,
-                        parseYear(item.release_date))
+                    R.string.item_movie_text_bottom,
+                    item.vote_average,
+                    parseYear(item.release_date)
+                )
             }
         }
 
@@ -52,10 +58,10 @@ class MoviesListAdapter : ListAdapter<MovieListResult, ViewHolder>(MovieDiffCall
         }
 
         companion object {
-            fun newInstance(parent: ViewGroup): ViewHolder {
+            fun newInstance(parent: ViewGroup, imageCornerRadius: Float): ViewHolder {
                 val inflater = LayoutInflater.from(parent.context)
                 val binding = ItemMovieBinding.inflate(inflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(binding, imageCornerRadius)
             }
         }
     }
@@ -66,7 +72,10 @@ class MoviesListAdapter : ListAdapter<MovieListResult, ViewHolder>(MovieDiffCall
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: MovieListResult, newItem: MovieListResult): Boolean {
+        override fun areContentsTheSame(
+            oldItem: MovieListResult,
+            newItem: MovieListResult
+        ): Boolean {
             return oldItem == newItem
         }
     }

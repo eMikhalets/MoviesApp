@@ -11,7 +11,7 @@
     <string name="home_hint_search">Search by movie name</string>
     <string name="home_text_show_all">See all</string>
     <string name="home_label_popular_artists">Popular Artists</string>
-    <string name="home_label_popular_movies">Now Playing Movies</string>
+    <string name="home_label_popular_movies">Popular Movies</string>
     <string name="home_label_playing_movies">Now Playing Movies</string>
     <string name="home_label_top_movies">Top Rated Movies</string>
     <string name="home_label_upcoming_movies">Upcoming Movies</string>
