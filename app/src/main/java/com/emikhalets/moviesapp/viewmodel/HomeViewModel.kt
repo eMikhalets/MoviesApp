@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.emikhalets.moviesapp.model.network.ApiFactory
 import com.emikhalets.moviesapp.model.network.ApiResult
-import com.emikhalets.moviesapp.model.pojo.MovieListResult
-import com.emikhalets.moviesapp.model.pojo.PopArtistsResult
+import com.emikhalets.moviesapp.model.pojo.ResultMovieList
+import com.emikhalets.moviesapp.model.pojo.ResultPopArtist
 import com.emikhalets.moviesapp.model.repository.HomeRepository
 import kotlinx.coroutines.launch
 
@@ -15,20 +15,20 @@ class HomeViewModel : ViewModel() {
 
     private val repository = HomeRepository(ApiFactory.get())
 
-    private val _popArtists = MutableLiveData<List<PopArtistsResult>>()
-    val popArtists get(): LiveData<List<PopArtistsResult>> = _popArtists
+    private val _popArtists = MutableLiveData<List<ResultPopArtist>>()
+    val popArtists get(): LiveData<List<ResultPopArtist>> = _popArtists
 
-    private val _moviesPopular = MutableLiveData<List<MovieListResult>>()
-    val moviesPopular get(): LiveData<List<MovieListResult>> = _moviesPopular
+    private val _moviesPopular = MutableLiveData<List<ResultMovieList>>()
+    val moviesPopular get(): LiveData<List<ResultMovieList>> = _moviesPopular
 
-    private val _moviesNowPlaying = MutableLiveData<List<MovieListResult>>()
-    val moviesNowPlaying get(): LiveData<List<MovieListResult>> = _moviesNowPlaying
+    private val _moviesNowPlaying = MutableLiveData<List<ResultMovieList>>()
+    val moviesNowPlaying get(): LiveData<List<ResultMovieList>> = _moviesNowPlaying
 
-    private val _moviesTopRated = MutableLiveData<List<MovieListResult>>()
-    val moviesTopRated get(): LiveData<List<MovieListResult>> = _moviesTopRated
+    private val _moviesTopRated = MutableLiveData<List<ResultMovieList>>()
+    val moviesTopRated get(): LiveData<List<ResultMovieList>> = _moviesTopRated
 
-    private val _moviesUpcoming = MutableLiveData<List<MovieListResult>>()
-    val moviesUpcoming get(): LiveData<List<MovieListResult>> = _moviesUpcoming
+    private val _moviesUpcoming = MutableLiveData<List<ResultMovieList>>()
+    val moviesUpcoming get(): LiveData<List<ResultMovieList>> = _moviesUpcoming
 
     private val _uiVisibility = MutableLiveData<Boolean>()
     val uiVisibility get(): LiveData<Boolean> = _uiVisibility

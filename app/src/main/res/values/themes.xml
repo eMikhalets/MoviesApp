@@ -14,6 +14,17 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Custom" />
+
+    <style name="Custom.RatingBar">
+        <item name="android:progressDrawable">@drawable/abs_ratingbar_custom</item>
+        <item name="android:indeterminateDrawable">@drawable/abs_ratingbar_custom</item>
+        <item name="android:minHeight">24dp</item>
+        <item name="android:maxHeight">24dp</item>
+        <item name="android:isIndicator">true</item>
+        <item name="android:thumb">@null</item>
+    </style>
+
     <style name="Home" />
 
     <style name="Home.Text" />
@@ -38,5 +49,45 @@
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="Details" />
+
+    <style name="Details.Text" />
+
+    <style name="Details.Text.Title">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Details.Text.TitleContent">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Details.Text.SubTitle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Details.Text.Content">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Details.Text.Link">
+        <item name="android:textColor">@color/home_text_show_all</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="Details.Text.TitleDetails">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

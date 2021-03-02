@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">MoviesApp</string>
 
-    <string name="details_text_back">Back</string>
-    <string name="details_text_reviews">%d reviews</string>
-    <string name="details_text_story">Storyline</string>
-    <string name="details_text_cast">Cast</string>
+    <string name="text_rating">%d / 10</string>
+    <string name="text_runtime">%d min</string>
+    <string name="text_money">%d $</string>
 
     <string name="home_text_no_internet">No Internet connection</string>
     <string name="home_label_discover_movies">Discover movies in The Movie DataBase</string>
@@ -17,4 +16,20 @@
     <string name="home_label_upcoming_movies">Upcoming Movies</string>
 
     <string name="item_movie_text_bottom">%.2f / %s</string>
+
+    <string name="details_text_story">Storyline</string>
+    <string name="details_text_cast">Cast</string>
+    <string name="details_text_show">See all</string>
+    <string name="details_text_details">Details</string>
+    <string name="details_text_status">Status:</string>
+    <string name="details_text_budget">Budget:</string>
+    <string name="details_text_revenue">Revenue:</string>
+    <string name="details_text_homepage">Homepage:</string>
+    <string name="details_text_similar">Similar</string>
+    <string name="details_text_reviews">Reviews</string>
+
+    <string name="item_cast_details_text_bottom">%s, %s</string>
+
+    <string name="cast_full_tab_cast">Cast</string>
+    <string name="cast_full_tab_crew">Crew</string>
 </resources>

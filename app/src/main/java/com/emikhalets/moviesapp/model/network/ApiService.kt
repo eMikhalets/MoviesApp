@@ -1,15 +1,11 @@
 package com.emikhalets.moviesapp.model.network
 
-import com.emikhalets.moviesapp.model.pojo.ConfigurationResponse
-import com.emikhalets.moviesapp.model.pojo.ResponseMoviesList
-import com.emikhalets.moviesapp.model.pojo.ResponsePopArtists
+import com.emikhalets.moviesapp.model.pojo.*
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-
-    @GET("configuration")
-    suspend fun configuration(): ConfigurationResponse
 
     @GET("movie/now_playing")
     suspend fun movieNowPlaying(
@@ -40,4 +36,31 @@ interface ApiService {
             @Query("page") page: Int = 1,
             @Query("language") language: String = "en_US"
     ): ResponsePopArtists
+
+    @GET("movie/{movie_id}")
+    suspend fun movieId(
+            @Path("movie_id") id: Int,
+            @Query("append_to_response") appendRequest: String = "release_dates",
+            @Query("language") language: String = "en-US"
+    ): ResponseMovieId
+
+    @GET("movie/{movie_id}/credits")
+    suspend fun movieCredits(
+            @Path("movie_id") id: Int,
+            @Query("language") language: String = "en-US"
+    ): ResponseCredits
+
+    @GET("movie/{movie_id}/reviews")
+    suspend fun movieReviews(
+            @Path("movie_id") id: Int,
+            @Query("page") page: Int = 1,
+            @Query("language") language: String = "en-US"
+    ): ResponseReviews
+
+    @GET("movie/{movie_id}/similar")
+    suspend fun movieSimilar(
+            @Path("movie_id") id: Int,
+            @Query("page") page: Int = 1,
+            @Query("language") language: String = "en-US"
+    ): ResponseSimilar
 }

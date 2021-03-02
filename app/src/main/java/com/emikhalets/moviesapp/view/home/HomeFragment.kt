@@ -9,12 +9,19 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.emikhalets.moviesapp.databinding.FragmentHomeBinding
+import com.emikhalets.moviesapp.utils.HomeNavigation
+import com.emikhalets.moviesapp.view.adapters.MoviesListAdapter
+import com.emikhalets.moviesapp.view.adapters.PopArtistsAdapter
+import com.emikhalets.moviesapp.view.review_list.ReviewListFragment
 import com.emikhalets.moviesapp.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val navClickListener: HomeNavigation?
+        get() = requireActivity() as? HomeNavigation?
 
     private var artistsAdapter: PopArtistsAdapter? = null
     private var moviesPopularAdapter: MoviesListAdapter? = null
@@ -79,10 +86,10 @@ class HomeFragment : Fragment() {
             resources.displayMetrics
         )
         artistsAdapter = PopArtistsAdapter(imageCornerRadius)
-        moviesPopularAdapter = MoviesListAdapter(imageCornerRadius)
-        moviesNowPlayingAdapter = MoviesListAdapter(imageCornerRadius)
-        moviesTopRatedAdapter = MoviesListAdapter(imageCornerRadius)
-        moviesUpcomingAdapter = MoviesListAdapter(imageCornerRadius)
+        moviesPopularAdapter = MoviesListAdapter(imageCornerRadius) { onMovieClick(it) }
+        moviesNowPlayingAdapter = MoviesListAdapter(imageCornerRadius) { onMovieClick(it) }
+        moviesTopRatedAdapter = MoviesListAdapter(imageCornerRadius) { onMovieClick(it) }
+        moviesUpcomingAdapter = MoviesListAdapter(imageCornerRadius) { onMovieClick(it) }
 
         with(binding) {
             listPopArtists.apply {
@@ -108,46 +115,39 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setInterfaceVisibility(isVisible: Boolean) {
+    private fun onMovieClick(movieId: Int) {
+        navClickListener?.navigateFromHomeToMovieDetails(movieId)
+    }
+
+    private fun setInterfaceVisibility(bool: Boolean) {
         val duration = 500L
-        val visible = 1f
-        val invisible = 0f
         with(binding) {
-            if (isVisible) {
-                pbLoadingData.animate().alpha(invisible).setDuration(duration).start()
-                textPopArtistsLabel.animate().alpha(visible).setDuration(duration).start()
-                textPopArtistsAll.animate().alpha(visible).setDuration(duration).start()
-                listPopMovies.animate().alpha(visible).setDuration(duration).start()
-                textPopMoviesLabel.animate().alpha(visible).setDuration(duration).start()
-                textPopMoviesAll.animate().alpha(visible).setDuration(duration).start()
-                listPopArtists.animate().alpha(visible).setDuration(duration).start()
-                textPlayingMoviesLabel.animate().alpha(visible).setDuration(duration).start()
-                textPlayingMoviesAll.animate().alpha(visible).setDuration(duration).start()
-                listPlayingMovies.animate().alpha(visible).setDuration(duration).start()
-                textTopMoviesLabel.animate().alpha(visible).setDuration(duration).start()
-                textTopMoviesAll.animate().alpha(visible).setDuration(duration).start()
-                listTopMovies.animate().alpha(visible).setDuration(duration).start()
-                textUpcomingMoviesLabel.animate().alpha(visible).setDuration(duration).start()
-                textUpcomingMoviesAll.animate().alpha(visible).setDuration(duration).start()
-                listUpcomingMovies.animate().alpha(visible).setDuration(duration).start()
-            } else {
-                pbLoadingData.animate().alpha(visible).setDuration(duration).start()
-                textPopArtistsLabel.animate().alpha(invisible).setDuration(duration).start()
-                textPopArtistsAll.animate().alpha(invisible).setDuration(duration).start()
-                listPopArtists.animate().alpha(invisible).setDuration(duration).start()
-                textPopMoviesLabel.animate().alpha(invisible).setDuration(duration).start()
-                textPopMoviesAll.animate().alpha(invisible).setDuration(duration).start()
-                listPopArtists.animate().alpha(invisible).setDuration(duration).start()
-                textPlayingMoviesLabel.animate().alpha(invisible).setDuration(duration).start()
-                textPlayingMoviesAll.animate().alpha(invisible).setDuration(duration).start()
-                listPlayingMovies.animate().alpha(invisible).setDuration(duration).start()
-                textTopMoviesLabel.animate().alpha(invisible).setDuration(duration).start()
-                textTopMoviesAll.animate().alpha(invisible).setDuration(duration).start()
-                listTopMovies.animate().alpha(invisible).setDuration(duration).start()
-                textUpcomingMoviesLabel.animate().alpha(invisible).setDuration(duration).start()
-                textUpcomingMoviesAll.animate().alpha(invisible).setDuration(duration).start()
-                listUpcomingMovies.animate().alpha(invisible).setDuration(duration).start()
-            }
+            pbLoadingData.animate().alpha(alpha(!bool)).setDuration(duration).start()
+            textPopArtistsLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
+            textPopArtistsAll.animate().alpha(alpha(bool)).setDuration(duration).start()
+            listPopMovies.animate().alpha(alpha(bool)).setDuration(duration).start()
+            textPopMoviesLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
+            textPopMoviesAll.animate().alpha(alpha(bool)).setDuration(duration).start()
+            listPopArtists.animate().alpha(alpha(bool)).setDuration(duration).start()
+            textPlayingMoviesLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
+            textPlayingMoviesAll.animate().alpha(alpha(bool)).setDuration(duration).start()
+            listPlayingMovies.animate().alpha(alpha(bool)).setDuration(duration).start()
+            textTopMoviesLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
+            textTopMoviesAll.animate().alpha(alpha(bool)).setDuration(duration).start()
+            listTopMovies.animate().alpha(alpha(bool)).setDuration(duration).start()
+            textUpcomingMoviesLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
+            textUpcomingMoviesAll.animate().alpha(alpha(bool)).setDuration(duration).start()
+            listUpcomingMovies.animate().alpha(alpha(bool)).setDuration(duration).start()
+        }
+    }
+
+    private fun alpha(isVisible: Boolean): Float {
+        return if (isVisible) 1f else 0f
+    }
+
+    companion object {
+        fun newInstance(): HomeFragment {
+            return HomeFragment()
         }
     }
 }

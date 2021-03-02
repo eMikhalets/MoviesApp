@@ -5,9 +5,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +24,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription"
-            tools:src="@drawable/ph_movie" />
+            tools:src="@drawable/ph_poster" />
+
+        <ImageView
+            android:id="@+id/image_star"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_star_fill"
+            app:layout_constraintBottom_toBottomOf="@+id/text_bottom"
+            app:layout_constraintStart_toStartOf="@+id/text_title"
+            app:layout_constraintTop_toTopOf="@+id/text_bottom"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/text_title"
@@ -46,10 +57,11 @@
             android:id="@+id/text_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:textColor="@color/black"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/text_title"
+            app:layout_constraintStart_toEndOf="@+id/image_star"
             app:layout_constraintTop_toBottomOf="@+id/text_title"
             tools:ignore="SmallSp"
             tools:text="6.7 / 2019" />

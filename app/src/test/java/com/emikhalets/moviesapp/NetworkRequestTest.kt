@@ -1,8 +1,6 @@
 package com.emikhalets.moviesapp
 
 import com.emikhalets.moviesapp.model.network.ApiService
-import com.emikhalets.moviesapp.model.pojo.ConfigurationImagesResponse
-import com.emikhalets.moviesapp.model.pojo.ConfigurationResponse
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
@@ -10,7 +8,6 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
-import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
@@ -50,15 +47,6 @@ class NetworkRequestTest {
     @After
     fun tearDown() {
         mockWebServer.shutdown()
-    }
-
-    @Test
-    fun configurationRequestTest() {
-        mockWebServer.enqueueResponse("configuration.json", HttpURLConnection.HTTP_OK)
-        runBlocking {
-            val response = apiService.configuration()
-            assertNotNull(response)
-        }
     }
 
     @Test
@@ -102,6 +90,15 @@ class NetworkRequestTest {
         mockWebServer.enqueueResponse("pop_artists.json", HttpURLConnection.HTTP_OK)
         runBlocking {
             val response = apiService.personPopular()
+            assertNotNull(response)
+        }
+    }
+
+    @Test
+    fun movieIdRequestTest() {
+        mockWebServer.enqueueResponse("movie_id.json", HttpURLConnection.HTTP_OK)
+        runBlocking {
+            val response = apiService.movieId(458576)
             assertNotNull(response)
         }
     }

@@ -4,7 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ConfigurationResponse(
-        @SerialName("images")
-        val images: ConfigurationImagesResponse
+data class Genre(
+        @SerialName("id")
+        val id: Int,
+        @SerialName("name")
+        val name: String
 )

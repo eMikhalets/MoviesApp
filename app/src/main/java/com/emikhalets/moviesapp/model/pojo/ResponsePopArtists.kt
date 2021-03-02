@@ -8,5 +8,5 @@ data class ResponsePopArtists(
         @SerialName("page")
         val page: Int,
         @SerialName("results")
-        val results: List<PopArtistsResult>,
+        val results: List<ResultPopArtist>,
 )
