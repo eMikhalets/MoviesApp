@@ -1,4 +1,4 @@
-package com.emikhalets.moviesapp.view.cast_list
+package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
 import android.view.LayoutInflater

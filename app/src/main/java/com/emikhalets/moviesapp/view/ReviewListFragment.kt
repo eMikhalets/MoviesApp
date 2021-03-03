@@ -1,4 +1,4 @@
-package com.emikhalets.moviesapp.view.review_list
+package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
 import android.util.TypedValue
@@ -80,7 +80,7 @@ class ReviewListFragment : Fragment() {
     }
 
     private fun onReviewClick(review: ResultReview) {
-        navClickListener?.navigateFromReviewListToReview(review)
+        navClickListener?.navigateFromReviewListToReviewDetails(review)
     }
 
     private fun setInterfaceVisibility(bool: Boolean) {

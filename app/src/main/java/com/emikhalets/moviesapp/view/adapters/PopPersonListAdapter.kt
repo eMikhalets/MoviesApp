@@ -2,49 +2,55 @@ package com.emikhalets.moviesapp.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.ItemCastBinding
-import com.emikhalets.moviesapp.model.pojo.Crew
+import com.emikhalets.moviesapp.model.pojo.ResultPopArtist
 import com.emikhalets.moviesapp.utils.buildProfileUrl185px
+import com.emikhalets.moviesapp.view.adapters.PopPersonListAdapter.ViewHolder
 
-class CrewAdapter(
-        private val imageCornerRadius: Float,
-        private val clickListener: (Int) -> Unit
-) : ListAdapter<Crew, CrewAdapter.ViewHolder>(CrewDiffCallback()) {
+class PopPersonListAdapter(
+    private val imageCornerRadius: Float,
+    private val clickListener: (Int) -> Unit
+) : PagedListAdapter<ResultPopArtist, ViewHolder>(PopArtistDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.newInstance(parent, imageCornerRadius)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
-        holder.itemView.setOnClickListener { clickListener.invoke(getItem(position).id) }
+        getItem(position)?.let { holder.bind(it) }
+        holder.itemView.setOnClickListener {
+            getItem(position)?.id?.let { id ->
+                clickListener.invoke(id)
+            }
+        }
     }
 
     class ViewHolder(
-            private val binding: ItemCastBinding,
-            private val imageCornerRadius: Float
+        private val binding: ItemCastBinding,
+        private val imageCornerRadius: Float
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Crew) {
+        fun bind(item: ResultPopArtist) {
             with(binding) {
-                imagePhoto.load(item.profile_path?.let { buildProfileUrl185px(it) }) {
+                imagePhoto.load(buildProfileUrl185px(item.profile_path)) {
                     placeholder(R.drawable.ph_actor)
                     fallback(R.drawable.ph_actor)
                     transformations(RoundedCornersTransformation(imageCornerRadius))
                 }
                 textName.text = item.name
-                textBottom.text = itemView.context.getString(
-                        R.string.item_cast_details_text_bottom,
-                        item.known_for_department,
-                        item.job
-                )
+                textBottom.text = getGender(item.gender)
             }
+        }
+
+        private fun getGender(intGender: Int): String {
+            return if (intGender == 0) "Male"
+            else "Female"
         }
 
         companion object {
@@ -56,13 +62,16 @@ class CrewAdapter(
         }
     }
 
-    class CrewDiffCallback : DiffUtil.ItemCallback<Crew>() {
+    class PopArtistDiffCallback : DiffUtil.ItemCallback<ResultPopArtist>() {
 
-        override fun areItemsTheSame(oldItem: Crew, newItem: Crew): Boolean {
+        override fun areItemsTheSame(oldItem: ResultPopArtist, newItem: ResultPopArtist): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Crew, newItem: Crew): Boolean {
+        override fun areContentsTheSame(
+            oldItem: ResultPopArtist,
+            newItem: ResultPopArtist
+        ): Boolean {
             return oldItem == newItem
         }
     }

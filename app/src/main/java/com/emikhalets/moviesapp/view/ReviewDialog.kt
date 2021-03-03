@@ -1,4 +1,4 @@
-package com.emikhalets.moviesapp.view.review_dialog
+package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
 import android.view.LayoutInflater

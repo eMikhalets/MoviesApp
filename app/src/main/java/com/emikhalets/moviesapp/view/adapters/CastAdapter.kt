@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.emikhalets.moviesapp.R
-import com.emikhalets.moviesapp.databinding.ItemCastDetailsBinding
+import com.emikhalets.moviesapp.databinding.ItemCastBinding
 import com.emikhalets.moviesapp.model.pojo.Cast
 import com.emikhalets.moviesapp.utils.buildProfileUrl185px
 
 class CastAdapter(
         private val imageCornerRadius: Float,
-        private val clickListener: (String) -> Unit
+        private val clickListener: (Int) -> Unit
 ) : ListAdapter<Cast, CastAdapter.ViewHolder>(CastDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,11 +23,11 @@ class CastAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
-        holder.itemView.setOnClickListener { clickListener.invoke(getItem(position).credit_id) }
+        holder.itemView.setOnClickListener { clickListener.invoke(getItem(position).id) }
     }
 
     class ViewHolder(
-            private val binding: ItemCastDetailsBinding,
+            private val binding: ItemCastBinding,
             private val imageCornerRadius: Float
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -50,7 +50,7 @@ class CastAdapter(
         companion object {
             fun newInstance(parent: ViewGroup, imageCornerRadius: Float): ViewHolder {
                 val inflater = LayoutInflater.from(parent.context)
-                val binding = ItemCastDetailsBinding.inflate(inflater, parent, false)
+                val binding = ItemCastBinding.inflate(inflater, parent, false)
                 return ViewHolder(binding, imageCornerRadius)
             }
         }

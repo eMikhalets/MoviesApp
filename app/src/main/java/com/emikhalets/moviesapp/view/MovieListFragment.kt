@@ -1,4 +1,4 @@
-package com.emikhalets.moviesapp.view.cast_list
+package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
 import android.util.TypedValue
@@ -6,18 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.emikhalets.moviesapp.databinding.FragmentCastListBinding
-import com.emikhalets.moviesapp.view.adapters.CrewAdapter
+import com.emikhalets.moviesapp.utils.MovieQueries
+import com.emikhalets.moviesapp.view.adapters.CastAdapter
 import com.emikhalets.moviesapp.viewmodel.CastPagerViewModel
 
-class CrewListFragment : Fragment() {
+class MovieListFragment : Fragment() {
 
     private var _binding: FragmentCastListBinding? = null
     private val binding get() = _binding!!
 
-    private var crewAdapter: CrewAdapter? = null
+    private var castAdapter: CastAdapter? = null
     private val castPagerViewModel: CastPagerViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -34,8 +36,8 @@ class CrewListFragment : Fragment() {
 
         initRecyclerAdapter()
 
-        castPagerViewModel.crew.observe(viewLifecycleOwner, { list ->
-            crewAdapter?.submitList(list)
+        castPagerViewModel.cast.observe(viewLifecycleOwner, { list ->
+            castAdapter?.submitList(list)
         })
         castPagerViewModel.notice.observe(viewLifecycleOwner, { msg ->
             Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
@@ -54,22 +56,27 @@ class CrewListFragment : Fragment() {
                 2f,
                 resources.displayMetrics
         )
-        crewAdapter = CrewAdapter(imageCornerRadius) { onCrewClickClick(it) }
+        castAdapter = CastAdapter(imageCornerRadius) { onMovieClick(it) }
 
         with(binding) {
             listCast.apply {
                 setHasFixedSize(true)
-                adapter = crewAdapter
+                adapter = castAdapter
             }
         }
     }
 
-    private fun onCrewClickClick(creditId: String) {
+    private fun onMovieClick(movieId: Int) {
     }
 
     companion object {
-        fun newInstance(): CrewListFragment {
-            return CrewListFragment()
+        private const val MOVIE_QUERY = "movie_query"
+
+        fun newInstance(query: MovieQueries): MovieListFragment {
+            val bundle = bundleOf(MOVIE_QUERY to query)
+            val fragment = MovieListFragment()
+            fragment.arguments = bundle
+            return fragment
         }
     }
 }

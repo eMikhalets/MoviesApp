@@ -4,6 +4,9 @@
     <string name="text_rating">%d / 10</string>
     <string name="text_runtime">%d min</string>
     <string name="text_money">%d $</string>
+    <string name="text_birthday">Birthday: %s</string>
+    <string name="text_deathday">Deathday: %s</string>
+    <string name="text_place_birth">Place of birth: %s</string>
 
     <string name="home_text_no_internet">No Internet connection</string>
     <string name="home_label_discover_movies">Discover movies in The Movie DataBase</string>
@@ -18,6 +21,8 @@
     <string name="item_movie_text_bottom">%.2f / %s</string>
 
     <string name="details_text_story">Storyline</string>
+    <string name="details_text_biography">Biography</string>
+    <string name="details_text_images">Images</string>
     <string name="details_text_cast">Cast</string>
     <string name="details_text_show">See all</string>
     <string name="details_text_details">Details</string>

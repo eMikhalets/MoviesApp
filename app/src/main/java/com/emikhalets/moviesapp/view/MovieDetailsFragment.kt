@@ -1,4 +1,4 @@
-package com.emikhalets.moviesapp.view.movie_details
+package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
 import android.util.TypedValue
@@ -37,9 +37,9 @@ class MovieDetailsFragment : Fragment() {
     private val movieDetailsViewModel: MovieDetailsViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
         return binding.root
@@ -90,9 +90,9 @@ class MovieDetailsFragment : Fragment() {
 
     private fun initRecyclerAdapters() {
         val imageCornerRadius = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            2f,
-            resources.displayMetrics
+                TypedValue.COMPLEX_UNIT_DIP,
+                2f,
+                resources.displayMetrics
         )
         castAdapter = CastAdapter(imageCornerRadius) { onCastClick(it) }
         reviewsAdapter = ReviewsAdapter(imageCornerRadius) { onReviewClick(it) }
@@ -114,12 +114,12 @@ class MovieDetailsFragment : Fragment() {
         }
     }
 
-    private fun onCastClick(creditId: String) {
-        navClickListener?.navigateFromMovieDetailsToCastDetails(creditId)
+    private fun onCastClick(personId: Int) {
+        navClickListener?.navigateFromMovieDetailsToPersonDetails(personId)
     }
 
     private fun navigateToCastList() {
-        navClickListener?.navigateFromMovieDetailsToCastList(movieDetailsViewModel.id)
+        navClickListener?.navigateFromMovieDetailsToPersonList(movieDetailsViewModel.id)
     }
 
     private fun onReviewClick(review: ResultReview) {
@@ -147,23 +147,23 @@ class MovieDetailsFragment : Fragment() {
             textYear.text = movieDetailsViewModel.parseYear(data.release_date)
             ratingBar.rating = (data.vote_average / 2).toFloat()
             textRating.text = getString(
-                R.string.text_rating,
-                data.vote_average.toInt()
+                    R.string.text_rating,
+                    data.vote_average.toInt()
             )
             textTags.text = movieDetailsViewModel.parseGenres(data.genres)
             textRuntime.text = getString(
-                R.string.text_runtime,
-                data.runtime
+                    R.string.text_runtime,
+                    data.runtime
             )
             textStory.text = data.overview
             textStatusContent.text = data.status
             textBudgetContent.text = getString(
-                R.string.text_money,
-                data.budget
+                    R.string.text_money,
+                    data.budget
             )
             textRevenueContent.text = getString(
-                R.string.text_money,
-                data.revenue
+                    R.string.text_money,
+                    data.revenue
             )
         }
     }

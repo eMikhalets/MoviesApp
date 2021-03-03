@@ -31,12 +31,6 @@ interface ApiService {
             @Query("language") language: String = "en_US"
     ): ResponseMoviesList
 
-    @GET("person/popular")
-    suspend fun personPopular(
-            @Query("page") page: Int = 1,
-            @Query("language") language: String = "en_US"
-    ): ResponsePopArtists
-
     @GET("movie/{movie_id}")
     suspend fun movieId(
             @Path("movie_id") id: Int,
@@ -63,4 +57,17 @@ interface ApiService {
             @Query("page") page: Int = 1,
             @Query("language") language: String = "en-US"
     ): ResponseSimilar
+
+    @GET("person/popular")
+    suspend fun personPopular(
+            @Query("page") page: Int = 1,
+            @Query("language") language: String = "en_US"
+    ): ResponsePopArtists
+
+    @GET("person/{person_id}")
+    suspend fun personById(
+            @Path("person_id") id: Int,
+            @Query("append_to_response") append_to_response: String = "images",
+            @Query("language") language: String = "en_US"
+    ): ResponsePersonId
 }

@@ -2,8 +2,7 @@ package com.emikhalets.moviesapp.view.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.emikhalets.moviesapp.view.cast_list.CastListFragment
-import com.emikhalets.moviesapp.view.cast_list.CrewListFragment
+import com.emikhalets.moviesapp.view.CastListFragment
 
 class CastPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
@@ -13,8 +12,8 @@ class CastPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> CastListFragment.newInstance()
-            else -> CrewListFragment.newInstance()
+            0 -> CastListFragment.newInstance(0)
+            else -> CastListFragment.newInstance(1)
         }
     }
 }

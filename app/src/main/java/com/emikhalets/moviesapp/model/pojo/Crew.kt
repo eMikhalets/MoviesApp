@@ -7,18 +7,16 @@ import kotlinx.serialization.Serializable
 data class Crew(
         @SerialName("adult")
         val adult: Boolean,
-        @SerialName("credit_id")
-        val credit_id: String,
-        @SerialName("department")
-        val department: String,
         @SerialName("gender")
         val gender: Int?,
         @SerialName("id")
         val id: Int,
-        @SerialName("job")
-        val job: String,
+        @SerialName("known_for_department")
+        val known_for_department: String,
         @SerialName("name")
         val name: String,
         @SerialName("profile_path")
-        val profile_path: String?
+        val profile_path: String?,
+        @SerialName("job")
+        val job: String
 )

@@ -5,17 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.ActivityMainBinding
 import com.emikhalets.moviesapp.model.pojo.ResultReview
-import com.emikhalets.moviesapp.utils.HomeNavigation
-import com.emikhalets.moviesapp.utils.MovieDetailsNavigation
-import com.emikhalets.moviesapp.utils.ReviewListNavigation
-import com.emikhalets.moviesapp.view.cast_list.CastPagerFragment
-import com.emikhalets.moviesapp.view.home.HomeFragment
-import com.emikhalets.moviesapp.view.movie_details.MovieDetailsFragment
-import com.emikhalets.moviesapp.view.review_dialog.ReviewDialog
-import com.emikhalets.moviesapp.view.review_list.ReviewListFragment
+import com.emikhalets.moviesapp.utils.*
 
 class MainActivity : AppCompatActivity(), HomeNavigation, MovieDetailsNavigation,
-    ReviewListNavigation {
+    ReviewListNavigation, PersonListNavigation, MoviesListNavigation {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -29,22 +22,66 @@ class MainActivity : AppCompatActivity(), HomeNavigation, MovieDetailsNavigation
             .commit()
     }
 
-    override fun navigateFromHomeToActorDetails(id: Int) {
-    }
+    // From Home page navigation
 
-    override fun navigateFromHomeToMovieDetails(id: Int) {
+    override fun navigateFromHomeToPersonDetails(personId: Int) {
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, MovieDetailsFragment.newInstance(id))
+            .add(R.id.fragment_container, PersonDetailsFragment.newInstance(personId))
             .addToBackStack(BACK_STACK)
             .commit()
     }
 
-    override fun navigateFromMovieDetailsToCastDetails(castId: String) {
+    override fun navigateFromHomeToAllPersons() {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, PersonListFragment.newInstance())
+            .addToBackStack(BACK_STACK)
+            .commit()
     }
 
-    override fun navigateFromMovieDetailsToCastList(id: Int) {
+    override fun navigateFromHomeToMovieDetails(movieId: Int) {
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, CastPagerFragment.newInstance(id))
+            .add(R.id.fragment_container, MovieDetailsFragment.newInstance(movieId))
+            .addToBackStack(BACK_STACK)
+            .commit()
+    }
+
+    override fun navigateFromHomeToAllMovies(query: MovieQueries) {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, MovieListFragment.newInstance(query))
+            .addToBackStack(BACK_STACK)
+            .commit()
+    }
+
+    // From Person List page navigation
+
+    override fun navigateFromPersonListToPersonDetails(personId: Int) {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, PersonDetailsFragment.newInstance(personId))
+            .addToBackStack(BACK_STACK)
+            .commit()
+    }
+
+    // From Movie List page navigation
+
+    override fun navigateFromMoviesListToMoviesDetails(movieId: Int) {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, MovieDetailsFragment.newInstance(movieId))
+            .addToBackStack(BACK_STACK)
+            .commit()
+    }
+
+    // From Movie Details page navigation
+
+    override fun navigateFromMovieDetailsToPersonDetails(personId: Int) {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, PersonDetailsFragment.newInstance(personId))
+            .addToBackStack(BACK_STACK)
+            .commit()
+    }
+
+    override fun navigateFromMovieDetailsToPersonList(movieId: Int) {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, CastPagerFragment.newInstance(movieId))
             .addToBackStack(BACK_STACK)
             .commit()
     }
@@ -56,21 +93,23 @@ class MainActivity : AppCompatActivity(), HomeNavigation, MovieDetailsNavigation
             .commit()
     }
 
-    override fun navigateFromMovieDetailsToReviewsList(id: Int) {
+    override fun navigateFromMovieDetailsToReviewsList(movieId: Int) {
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, ReviewListFragment.newInstance(id))
+            .add(R.id.fragment_container, ReviewListFragment.newInstance(movieId))
             .addToBackStack(BACK_STACK)
             .commit()
     }
 
-    override fun navigateFromMovieDetailsToSimilarMovieDetails(id: Int) {
+    override fun navigateFromMovieDetailsToSimilarMovieDetails(movieId: Int) {
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, MovieDetailsFragment.newInstance(id))
+            .add(R.id.fragment_container, MovieDetailsFragment.newInstance(movieId))
             .addToBackStack(BACK_STACK)
             .commit()
     }
 
-    override fun navigateFromReviewListToReview(review: ResultReview) {
+    // From Review List page navigation
+
+    override fun navigateFromReviewListToReviewDetails(review: ResultReview) {
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, ReviewDialog.newInstance(review))
             .addToBackStack(BACK_STACK)

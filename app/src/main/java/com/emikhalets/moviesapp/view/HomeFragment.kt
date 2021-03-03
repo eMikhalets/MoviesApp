@@ -1,4 +1,4 @@
-package com.emikhalets.moviesapp.view.home
+package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
 import android.util.TypedValue
@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.emikhalets.moviesapp.databinding.FragmentHomeBinding
 import com.emikhalets.moviesapp.utils.HomeNavigation
+import com.emikhalets.moviesapp.utils.MovieQueries
+import com.emikhalets.moviesapp.view.adapters.HomePersonAdapter
 import com.emikhalets.moviesapp.view.adapters.MoviesListAdapter
-import com.emikhalets.moviesapp.view.adapters.PopArtistsAdapter
-import com.emikhalets.moviesapp.view.review_list.ReviewListFragment
 import com.emikhalets.moviesapp.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
@@ -23,7 +23,7 @@ class HomeFragment : Fragment() {
     private val navClickListener: HomeNavigation?
         get() = requireActivity() as? HomeNavigation?
 
-    private var artistsAdapter: PopArtistsAdapter? = null
+    private var personsAdapter: HomePersonAdapter? = null
     private var moviesPopularAdapter: MoviesListAdapter? = null
     private var moviesNowPlayingAdapter: MoviesListAdapter? = null
     private var moviesTopRatedAdapter: MoviesListAdapter? = null
@@ -46,27 +46,37 @@ class HomeFragment : Fragment() {
         initRecyclerAdapters()
         if (savedInstanceState == null) homeViewModel.loadData()
 
-        homeViewModel.popArtists.observe(viewLifecycleOwner, { list ->
-            artistsAdapter?.submitList(list)
-        })
-        homeViewModel.moviesPopular.observe(viewLifecycleOwner, { list ->
-            moviesPopularAdapter?.submitList(list)
-        })
-        homeViewModel.moviesNowPlaying.observe(viewLifecycleOwner, { list ->
-            moviesNowPlayingAdapter?.submitList(list)
-        })
-        homeViewModel.moviesTopRated.observe(viewLifecycleOwner, { list ->
-            moviesTopRatedAdapter?.submitList(list)
-        })
-        homeViewModel.moviesUpcoming.observe(viewLifecycleOwner, { list ->
-            moviesUpcomingAdapter?.submitList(list)
-        })
-        homeViewModel.uiVisibility.observe(viewLifecycleOwner, { isUiReady ->
-            setInterfaceVisibility(isUiReady)
-        })
-        homeViewModel.notice.observe(viewLifecycleOwner, { msg ->
-            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
-        })
+        with(homeViewModel) {
+            popArtists.observe(viewLifecycleOwner, { list ->
+                personsAdapter?.submitList(list)
+            })
+            moviesPopular.observe(viewLifecycleOwner, { list ->
+                moviesPopularAdapter?.submitList(list)
+            })
+            moviesNowPlaying.observe(viewLifecycleOwner, { list ->
+                moviesNowPlayingAdapter?.submitList(list)
+            })
+            moviesTopRated.observe(viewLifecycleOwner, { list ->
+                moviesTopRatedAdapter?.submitList(list)
+            })
+            moviesUpcoming.observe(viewLifecycleOwner, { list ->
+                moviesUpcomingAdapter?.submitList(list)
+            })
+            uiVisibility.observe(viewLifecycleOwner, { isUiReady ->
+                setInterfaceVisibility(isUiReady)
+            })
+            notice.observe(viewLifecycleOwner, { msg ->
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+            })
+        }
+
+        with(binding) {
+            textPopArtistsAll.setOnClickListener { onAllPopArtistClick() }
+            textPopMoviesAll.setOnClickListener { onAllMovieClick(MovieQueries.POPULAR) }
+            textPlayingMoviesAll.setOnClickListener { onAllMovieClick(MovieQueries.NOW_PLAYING) }
+            textTopMoviesAll.setOnClickListener { onAllMovieClick(MovieQueries.TOP_RATED) }
+            textUpcomingMoviesAll.setOnClickListener { onAllMovieClick(MovieQueries.UPCOMING) }
+        }
     }
 
     override fun onDestroyView() {
@@ -85,7 +95,7 @@ class HomeFragment : Fragment() {
             2f,
             resources.displayMetrics
         )
-        artistsAdapter = PopArtistsAdapter(imageCornerRadius)
+        personsAdapter = HomePersonAdapter(imageCornerRadius) { onPopArtistClick(it) }
         moviesPopularAdapter = MoviesListAdapter(imageCornerRadius) { onMovieClick(it) }
         moviesNowPlayingAdapter = MoviesListAdapter(imageCornerRadius) { onMovieClick(it) }
         moviesTopRatedAdapter = MoviesListAdapter(imageCornerRadius) { onMovieClick(it) }
@@ -94,7 +104,7 @@ class HomeFragment : Fragment() {
         with(binding) {
             listPopArtists.apply {
                 setHasFixedSize(true)
-                adapter = artistsAdapter
+                adapter = personsAdapter
             }
             listPopMovies.apply {
                 setHasFixedSize(true)
@@ -113,6 +123,18 @@ class HomeFragment : Fragment() {
                 adapter = moviesUpcomingAdapter
             }
         }
+    }
+
+    private fun onAllPopArtistClick() {
+        navClickListener?.navigateFromHomeToAllPersons()
+    }
+
+    private fun onPopArtistClick(artistId: Int) {
+        navClickListener?.navigateFromHomeToPersonDetails(artistId)
+    }
+
+    private fun onAllMovieClick(query: MovieQueries) {
+        navClickListener?.navigateFromHomeToAllMovies(query)
     }
 
     private fun onMovieClick(movieId: Int) {
