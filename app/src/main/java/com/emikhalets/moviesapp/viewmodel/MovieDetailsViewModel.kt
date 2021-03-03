@@ -1,5 +1,6 @@
 package com.emikhalets.moviesapp.viewmodel
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,6 +35,7 @@ class MovieDetailsViewModel : ViewModel() {
 
     var id = -1
 
+    @SuppressLint("NullSafeMutableLiveData")
     fun loadMovieData(movieId: Int) {
         viewModelScope.launch {
             _uiVisibility.postValue(false)

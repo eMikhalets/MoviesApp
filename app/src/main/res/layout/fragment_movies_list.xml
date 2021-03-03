@@ -19,7 +19,7 @@
         tools:alpha="1" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_reviews"
+        android:id="@+id/list_movies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"

@@ -8,7 +8,6 @@
     <string name="text_deathday">Deathday: %s</string>
     <string name="text_place_birth">Place of birth: %s</string>
 
-    <string name="home_text_no_internet">No Internet connection</string>
     <string name="home_label_discover_movies">Discover movies in The Movie DataBase</string>
     <string name="home_hint_search">Search by movie name</string>
     <string name="home_text_show_all">See all</string>
@@ -29,7 +28,6 @@
     <string name="details_text_status">Status:</string>
     <string name="details_text_budget">Budget:</string>
     <string name="details_text_revenue">Revenue:</string>
-    <string name="details_text_homepage">Homepage:</string>
     <string name="details_text_similar">Similar</string>
     <string name="details_text_reviews">Reviews</string>
 

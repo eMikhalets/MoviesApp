@@ -34,11 +34,11 @@ class PersonListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initRecyclerAdapter()
-        popPersonViewModel.initPager()
-        setInterfaceVisibility(false)
-
+        if (savedInstanceState == null) {
+            popPersonViewModel.initPager()
+            setInterfaceVisibility(false)
+        }
         popPersonViewModel.person.observe(viewLifecycleOwner) { list ->
             personAdapter?.submitList(list)
             setInterfaceVisibility(true)
@@ -58,12 +58,9 @@ class PersonListFragment : Fragment() {
             resources.displayMetrics
         )
         personAdapter = PopPersonListAdapter(imageCornerRadius) { onCastClickClick(it) }
-
-        with(binding) {
-            listPerson.apply {
-                setHasFixedSize(true)
-                adapter = personAdapter
-            }
+        binding.listPerson.apply {
+            setHasFixedSize(true)
+            adapter = personAdapter
         }
     }
 

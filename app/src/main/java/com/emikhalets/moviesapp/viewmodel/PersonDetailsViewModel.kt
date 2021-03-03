@@ -1,5 +1,6 @@
 package com.emikhalets.moviesapp.viewmodel
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,6 +26,7 @@ class PersonDetailsViewModel : ViewModel() {
 
     var id = -1
 
+    @SuppressLint("NullSafeMutableLiveData")
     fun loadPersonData(personId: Int) {
         viewModelScope.launch {
             _uiVisibility.postValue(false)
@@ -37,15 +39,6 @@ class PersonDetailsViewModel : ViewModel() {
                 ApiResult.Loading -> {
                 }
             }
-        }
-    }
-
-    fun parseYear(release: String): String {
-        return try {
-            release.split("-").first()
-        } catch (indexEx: IndexOutOfBoundsException) {
-            indexEx.printStackTrace()
-            "No year"
         }
     }
 

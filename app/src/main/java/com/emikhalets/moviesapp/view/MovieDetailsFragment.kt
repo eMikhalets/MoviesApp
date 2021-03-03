@@ -51,7 +51,7 @@ class MovieDetailsFragment : Fragment() {
         initRecyclerAdapters()
         if (savedInstanceState == null) {
             arguments?.let {
-                val movieId = it.getInt(MOVIE_ID) ?: -1
+                val movieId = it.getInt(MOVIE_ID)
                 movieDetailsViewModel.loadMovieData(movieId)
             }
         }

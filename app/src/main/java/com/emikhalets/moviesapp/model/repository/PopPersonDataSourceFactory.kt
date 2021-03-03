@@ -5,7 +5,6 @@ import androidx.paging.DataSource
 import com.emikhalets.moviesapp.model.pojo.ResultPopArtist
 import kotlinx.coroutines.CoroutineScope
 
-
 class PopPersonDataSourceFactory(
     private val scope: CoroutineScope
 ) : DataSource.Factory<Int, ResultPopArtist>() {

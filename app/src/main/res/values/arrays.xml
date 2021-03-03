@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="listTypes">
-        <item>Popular</item>
-        <item>Upcoming</item>
-        <item>Top rated</item>
-        <item>Now playing</item>
-    </string-array>
-</resources>

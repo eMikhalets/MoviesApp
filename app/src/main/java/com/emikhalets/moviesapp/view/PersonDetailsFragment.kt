@@ -39,7 +39,7 @@ class PersonDetailsFragment : Fragment() {
         initRecyclerAdapters()
         if (savedInstanceState == null) {
             arguments?.let {
-                val personId = it.getInt(PERSON_ID) ?: -1
+                val personId = it.getInt(PERSON_ID)
                 personDetailsViewModel.loadPersonData(personId)
             }
         }

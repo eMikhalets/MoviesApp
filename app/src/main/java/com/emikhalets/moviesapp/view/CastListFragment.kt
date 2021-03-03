@@ -45,7 +45,7 @@ class CastListFragment : Fragment() {
                 resources.displayMetrics
         )
         arguments?.let {
-            val castType = it.getInt(CAST_TYPE) ?: 0
+            val castType = it.getInt(CAST_TYPE)
             if (castType == 0) initCastAdapter(imageCornerRadius)
             else initCrewAdapter(imageCornerRadius)
         }
