@@ -3,6 +3,7 @@ package com.emikhalets.moviesapp.utils
 import com.emikhalets.moviesapp.model.pojo.ResultReview
 
 interface HomeNavigation {
+    fun navigateFromHomeToSearchMovie(movieId: Int)
     fun navigateFromHomeToPersonDetails(personId: Int)
     fun navigateFromHomeToAllPersons()
     fun navigateFromHomeToMovieDetails(movieId: Int)

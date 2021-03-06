@@ -12,12 +12,10 @@ import com.emikhalets.moviesapp.databinding.ItemMoviePagerBinding
 import com.emikhalets.moviesapp.model.pojo.ResultMovieList
 import com.emikhalets.moviesapp.utils.buildPosterUrl185px
 import com.emikhalets.moviesapp.view.adapters.MoviesPagerAdapter.ViewHolder
-import java.text.SimpleDateFormat
-import java.util.*
 
 class MoviesPagerAdapter(
-    private val imageCornerRadius: Float,
-    private val clickListener: (Int) -> Unit
+        private val imageCornerRadius: Float,
+        private val clickListener: (Int) -> Unit
 ) : PagedListAdapter<ResultMovieList, ViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,8 +32,8 @@ class MoviesPagerAdapter(
     }
 
     class ViewHolder(
-        private val binding: ItemMoviePagerBinding,
-        private val imageCornerRadius: Float
+            private val binding: ItemMoviePagerBinding,
+            private val imageCornerRadius: Float
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ResultMovieList) {
@@ -47,20 +45,22 @@ class MoviesPagerAdapter(
                     transformations(RoundedCornersTransformation(imageCornerRadius))
                 }
                 textTitle.text = item.title
-                textDate.text = item.release_date?.let { formatDate(it) }
+                textDate.text = item.release_date?.let { parseYear(it) }
                 textRating.text = root.context.getString(
-                    R.string.text_rating,
-                    item.vote_average.toInt()
+                        R.string.text_rating,
+                        item.vote_average.toInt()
                 )
                 ratingBar.rating = item.vote_average.toFloat() / 2
             }
         }
 
-        private fun formatDate(dateStr: String): String {
-            val formatIn = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val formatOut = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())
-            val date = formatIn.parse(dateStr) ?: Date()
-            return formatOut.format(date)
+        private fun parseYear(release: String): String {
+            return try {
+                release.split("-").first()
+            } catch (indexEx: IndexOutOfBoundsException) {
+                indexEx.printStackTrace()
+                "No year"
+            }
         }
 
         companion object {
@@ -79,8 +79,8 @@ class MoviesPagerAdapter(
         }
 
         override fun areContentsTheSame(
-            oldItem: ResultMovieList,
-            newItem: ResultMovieList
+                oldItem: ResultMovieList,
+                newItem: ResultMovieList
         ): Boolean {
             return oldItem == newItem
         }

@@ -12,11 +12,11 @@ import com.emikhalets.moviesapp.utils.MovieQueries
 class MoviesPagerViewModel : ViewModel() {
 
     private var dataSource: MoviesDataSourceFactory? = null
-    var person: LiveData<PagedList<ResultMovieList>>? = null
+    var movies: LiveData<PagedList<ResultMovieList>>? = null
 
     fun initPager(query: MovieQueries) {
         dataSource = MoviesDataSourceFactory(viewModelScope, query)
-        person = dataSource?.toLiveData(20)
+        movies = dataSource?.toLiveData(20)
         dataSource?.dataSource?.value?.invalidate()
     }
 }

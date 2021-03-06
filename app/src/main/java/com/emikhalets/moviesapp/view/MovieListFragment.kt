@@ -44,7 +44,7 @@ class MovieListFragment : Fragment() {
                 setInterfaceVisibility(false)
             }
         }
-        moviesPagerViewModel.person?.observe(viewLifecycleOwner, { list ->
+        moviesPagerViewModel.movies?.observe(viewLifecycleOwner, { list ->
             moviesAdapter?.submitList(list)
             setInterfaceVisibility(true)
         })

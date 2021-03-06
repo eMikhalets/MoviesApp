@@ -70,4 +70,12 @@ interface ApiService {
             @Query("append_to_response") append_to_response: String = "images",
             @Query("language") language: String = "en_US"
     ): ResponsePersonId
+
+    @GET("search/movie")
+    suspend fun searchMovies(
+            @Query("query") query: String,
+            @Query("page") page: Int = 1,
+            @Query("include_adult") include_adult: Boolean = false,
+            @Query("language") language: String = "en_US"
+    ): ResponseMoviesList
 }

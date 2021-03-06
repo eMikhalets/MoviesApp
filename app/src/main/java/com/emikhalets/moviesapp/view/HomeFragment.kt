@@ -5,14 +5,20 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.emikhalets.moviesapp.databinding.FragmentHomeBinding
+import com.emikhalets.moviesapp.utils.CustomSearchTextListener
 import com.emikhalets.moviesapp.utils.HomeNavigation
+import com.emikhalets.moviesapp.utils.HomeState
 import com.emikhalets.moviesapp.utils.MovieQueries
 import com.emikhalets.moviesapp.view.adapters.HomePersonAdapter
 import com.emikhalets.moviesapp.view.adapters.MoviesListAdapter
+import com.emikhalets.moviesapp.view.adapters.MoviesPagerAdapter
 import com.emikhalets.moviesapp.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
@@ -23,6 +29,7 @@ class HomeFragment : Fragment() {
     private val navClickListener: HomeNavigation?
         get() = requireActivity() as? HomeNavigation?
 
+    private var searchAdapter: MoviesPagerAdapter? = null
     private var personsAdapter: HomePersonAdapter? = null
     private var moviesPopularAdapter: MoviesListAdapter? = null
     private var moviesNowPlayingAdapter: MoviesListAdapter? = null
@@ -32,9 +39,9 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -47,23 +54,14 @@ class HomeFragment : Fragment() {
         if (savedInstanceState == null) homeViewModel.loadData()
 
         with(homeViewModel) {
-            popArtists.observe(viewLifecycleOwner, { list ->
-                personsAdapter?.submitList(list)
-            })
-            moviesPopular.observe(viewLifecycleOwner, { list ->
-                moviesPopularAdapter?.submitList(list)
-            })
-            moviesNowPlaying.observe(viewLifecycleOwner, { list ->
-                moviesNowPlayingAdapter?.submitList(list)
-            })
-            moviesTopRated.observe(viewLifecycleOwner, { list ->
-                moviesTopRatedAdapter?.submitList(list)
-            })
-            moviesUpcoming.observe(viewLifecycleOwner, { list ->
-                moviesUpcomingAdapter?.submitList(list)
-            })
-            uiVisibility.observe(viewLifecycleOwner, { isUiReady ->
-                setInterfaceVisibility(isUiReady)
+            search?.observe(viewLifecycleOwner, { searchAdapter?.submitList(it) })
+            popArtists.observe(viewLifecycleOwner, { personsAdapter?.submitList(it) })
+            moviesPopular.observe(viewLifecycleOwner, { moviesPopularAdapter?.submitList(it) })
+            moviesPlaying.observe(viewLifecycleOwner, { moviesNowPlayingAdapter?.submitList(it) })
+            moviesTopRated.observe(viewLifecycleOwner, { moviesTopRatedAdapter?.submitList(it) })
+            moviesUpcoming.observe(viewLifecycleOwner, { moviesUpcomingAdapter?.submitList(it) })
+            visibility.observe(viewLifecycleOwner, {
+                setInterfaceVisibility(it)
             })
             notice.observe(viewLifecycleOwner, { msg ->
                 Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
@@ -71,6 +69,11 @@ class HomeFragment : Fragment() {
         }
 
         with(binding) {
+            val closeSearchId = searchView.context.resources
+                    .getIdentifier("android:id/search_close_btn", null, null)
+            val closeSearch = searchView.findViewById<ImageView>(closeSearchId)
+            searchView.setOnQueryTextListener(onSearchClick())
+            closeSearch.setOnClickListener { onCloseListener() }
             textPopArtistsAll.setOnClickListener { onAllPopArtistClick() }
             textPopMoviesAll.setOnClickListener { onAllMovieClick(MovieQueries.POPULAR) }
             textPlayingMoviesAll.setOnClickListener { onAllMovieClick(MovieQueries.NOW_PLAYING) }
@@ -81,6 +84,7 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.listSearch.adapter = null
         binding.listPopArtists.adapter = null
         binding.listPopMovies.adapter = null
         binding.listPlayingMovies.adapter = null
@@ -91,10 +95,11 @@ class HomeFragment : Fragment() {
 
     private fun initRecyclerAdapters() {
         val imageCornerRadius = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            2f,
-            resources.displayMetrics
+                TypedValue.COMPLEX_UNIT_DIP,
+                2f,
+                resources.displayMetrics
         )
+        searchAdapter = MoviesPagerAdapter(imageCornerRadius) { onSearchMovieClick(it) }
         personsAdapter = HomePersonAdapter(imageCornerRadius) { onPopArtistClick(it) }
         moviesPopularAdapter = MoviesListAdapter(imageCornerRadius) { onMovieClick(it) }
         moviesNowPlayingAdapter = MoviesListAdapter(imageCornerRadius) { onMovieClick(it) }
@@ -102,6 +107,10 @@ class HomeFragment : Fragment() {
         moviesUpcomingAdapter = MoviesListAdapter(imageCornerRadius) { onMovieClick(it) }
 
         with(binding) {
+            listSearch.apply {
+                setHasFixedSize(true)
+                adapter = searchAdapter
+            }
             listPopArtists.apply {
                 setHasFixedSize(true)
                 adapter = personsAdapter
@@ -125,6 +134,35 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun onSearchClick(): SearchView.OnQueryTextListener {
+        return object : CustomSearchTextListener() {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return if (query.isNotEmpty()) {
+                    homeViewModel.updateVisibility(HomeState.LOADING)
+                    homeViewModel.initSearchPager(query)
+                    binding.searchView.clearFocus()
+                    homeViewModel.search?.observe(viewLifecycleOwner, { list ->
+                        searchAdapter?.submitList(list)
+                        homeViewModel.updateVisibility(HomeState.SEARCH)
+                    })
+                    true
+                } else {
+                    false
+                }
+            }
+        }
+    }
+
+    private fun onCloseListener() {
+        homeViewModel.search = null
+        homeViewModel.updateVisibility(HomeState.DEFAULT)
+        binding.searchView.onActionViewCollapsed()
+    }
+
+    private fun onSearchMovieClick(movieId: Int) {
+        navClickListener?.navigateFromHomeToSearchMovie(movieId)
+    }
+
     private fun onAllPopArtistClick() {
         navClickListener?.navigateFromHomeToAllPersons()
     }
@@ -141,30 +179,30 @@ class HomeFragment : Fragment() {
         navClickListener?.navigateFromHomeToMovieDetails(movieId)
     }
 
-    private fun setInterfaceVisibility(bool: Boolean) {
-        val duration = 500L
-        with(binding) {
-            pbLoadingData.animate().alpha(alpha(!bool)).setDuration(duration).start()
-            textPopArtistsLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
-            textPopArtistsAll.animate().alpha(alpha(bool)).setDuration(duration).start()
-            listPopMovies.animate().alpha(alpha(bool)).setDuration(duration).start()
-            textPopMoviesLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
-            textPopMoviesAll.animate().alpha(alpha(bool)).setDuration(duration).start()
-            listPopArtists.animate().alpha(alpha(bool)).setDuration(duration).start()
-            textPlayingMoviesLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
-            textPlayingMoviesAll.animate().alpha(alpha(bool)).setDuration(duration).start()
-            listPlayingMovies.animate().alpha(alpha(bool)).setDuration(duration).start()
-            textTopMoviesLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
-            textTopMoviesAll.animate().alpha(alpha(bool)).setDuration(duration).start()
-            listTopMovies.animate().alpha(alpha(bool)).setDuration(duration).start()
-            textUpcomingMoviesLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
-            textUpcomingMoviesAll.animate().alpha(alpha(bool)).setDuration(duration).start()
-            listUpcomingMovies.animate().alpha(alpha(bool)).setDuration(duration).start()
+    private fun setInterfaceVisibility(state: HomeState) {
+        when (state) {
+            HomeState.DEFAULT -> {
+                with(binding) {
+                    scrollView.visibility = View.VISIBLE
+                    listSearch.visibility = View.GONE
+                    pbLoadingData.visibility = View.GONE
+                }
+            }
+            HomeState.SEARCH -> {
+                with(binding) {
+                    listSearch.visibility = View.VISIBLE
+                    scrollView.visibility = View.GONE
+                    pbLoadingData.visibility = View.GONE
+                }
+            }
+            HomeState.LOADING -> {
+                with(binding) {
+                    pbLoadingData.visibility = View.VISIBLE
+                    listSearch.visibility = View.GONE
+                    scrollView.visibility = View.GONE
+                }
+            }
         }
-    }
-
-    private fun alpha(isVisible: Boolean): Float {
-        return if (isVisible) 1f else 0f
     }
 
     companion object {

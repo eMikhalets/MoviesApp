@@ -1,19 +1,19 @@
 package com.emikhalets.moviesapp.model.repository
+
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.emikhalets.moviesapp.model.pojo.ResultMovieList
-import com.emikhalets.moviesapp.utils.MovieQueries
 import kotlinx.coroutines.CoroutineScope
 
-class MoviesDataSourceFactory(
+class SearchMoviesDataSourceFactory(
         private val scope: CoroutineScope,
-        private val query: MovieQueries
+        private val query: String
 ) : DataSource.Factory<Int, ResultMovieList>() {
 
-    val dataSource = MutableLiveData<MoviesDataSource>()
+    val dataSource = MutableLiveData<SearchMoviesDataSource>()
 
     override fun create(): DataSource<Int, ResultMovieList> {
-        val source = MoviesDataSource(scope, query)
+        val source = SearchMoviesDataSource(scope, query)
         dataSource.postValue(source)
         return source
     }

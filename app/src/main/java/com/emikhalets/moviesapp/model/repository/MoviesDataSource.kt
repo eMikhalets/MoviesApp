@@ -48,19 +48,19 @@ class MoviesDataSource(
             val page = params.key
             when (query) {
                 MovieQueries.POPULAR -> {
-                    val response = api.moviePopular(1)
+                    val response = api.moviePopular(page)
                     callback.onResult(response.results, page + 1)
                 }
                 MovieQueries.NOW_PLAYING -> {
-                    val response = api.movieNowPlaying(1)
+                    val response = api.movieNowPlaying(page)
                     callback.onResult(response.results, page + 1)
                 }
                 MovieQueries.TOP_RATED -> {
-                    val response = api.movieTopRated(1)
+                    val response = api.movieTopRated(page)
                     callback.onResult(response.results, page + 1)
                 }
                 MovieQueries.UPCOMING -> {
-                    val response = api.movieUpcoming(1)
+                    val response = api.movieUpcoming(page)
                     callback.onResult(response.results, page + 1)
                 }
             }
