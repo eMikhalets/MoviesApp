@@ -24,8 +24,6 @@ class PersonDetailsViewModel : ViewModel() {
     private val _notice = MutableLiveData<String>()
     val notice get(): LiveData<String> = _notice
 
-    var id = -1
-
     @SuppressLint("NullSafeMutableLiveData")
     fun loadPersonData(personId: Int) {
         viewModelScope.launch {
@@ -40,9 +38,5 @@ class PersonDetailsViewModel : ViewModel() {
                 }
             }
         }
-    }
-
-    fun getPerson(): ResponsePersonId? {
-        return _person.value
     }
 }

@@ -1,46 +1,38 @@
 package com.emikhalets.moviesapp.utils
 
 import com.emikhalets.moviesapp.model.network.ApiResult
+import com.emikhalets.moviesapp.model.pojo.Profile
+
+// ================= Allowed backdrop sizes: w300, w780, w1280
 
 /**
- * Builds a url to request backdrop of movie with width = 1280 px
+ * Builds a url to request backdrop of movie with width = 780 px
  */
-fun buildBackdropUrl1280px(path: String) = "https://image.tmdb.org/t/p/w1280/$path"
+fun buildBackdrop780px(path: String) = "https://image.tmdb.org/t/p/w780/$path"
 
-/**
- * Builds a url to request poster of movie with width = 780 px
- */
-fun buildPosterUrl780px(path: String) = "https://image.tmdb.org/t/p/w780/$path"
+// ================= Allowed poster sizes: w92, w154, w185, w342, w500, w780
 
 /**
  * Builds a url to request poster of movie with width = 185 px
  */
-fun buildPosterUrl185px(path: String) = "https://image.tmdb.org/t/p/w185/$path"
+fun buildPoster185px(path: String) = "https://image.tmdb.org/t/p/w185/$path"
 
 /**
- * Builds a url to request profile of movie with width = 632 px
+ * Builds a url to request poster of movie with width = 780 px
  */
-fun buildProfileUrl632px(path: String) = "https://image.tmdb.org/t/p/w632/$path"
+fun buildPoster780px(path: String) = "https://image.tmdb.org/t/p/w780/$path"
+
+// ================= Allowed profile sizes: w45, w185, w632
 
 /**
  * Builds a url to request profile of movie with width = 185 px
  */
-fun buildProfileUrl185px(path: String) = "https://image.tmdb.org/t/p/w185/$path"
+fun buildProfile185px(path: String) = "https://image.tmdb.org/t/p/w185/$path"
 
 /**
- * Builds a url to request still of movie with width = 300 px
+ * Builds a url to request profile of movie with width = 632 px
  */
-fun buildStillUrl300px(path: String) = "https://image.tmdb.org/t/p/w300/$path"
-
-/**
- * Builds a url to request logo of movie with width = 500 px
- */
-fun buildLogoUrl500px(path: String) = "https://image.tmdb.org/t/p/w500/$path"
-
-/**
- * Builds a url to request logo of movie with width = 185 px
- */
-fun buildLogoUrl185px(path: String) = "https://image.tmdb.org/t/p/w185/$path"
+fun buildProfile632px(path: String) = "https://image.tmdb.org/t/p/w632/$path"
 
 //suspend fun <T> safeDatabaseCall(call: suspend () -> T): DbResult<T> =
 //    try {
@@ -52,10 +44,21 @@ fun buildLogoUrl185px(path: String) = "https://image.tmdb.org/t/p/w185/$path"
 //    }
 
 suspend fun <T> safeNetworkCall(call: suspend () -> T): ApiResult<T> =
-    try {
-        val result = call.invoke()
-        ApiResult.Success(result)
-    } catch (ex: Exception) {
-        ex.printStackTrace()
-        ApiResult.Error(ex.message ?: "", ex)
-    }
+        try {
+            val result = call.invoke()
+            ApiResult.Success(result)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            ApiResult.Error(ex.message ?: "", ex)
+        }
+
+fun formatImagesList(path: String): ArrayList<String> {
+    return arrayListOf(path)
+}
+
+fun formatImagesList(images: List<Profile>): ArrayList<String> {
+    val list = ArrayList<String>()
+    val paths = images.map { it.file_path }
+    paths.forEach { list.add(it) }
+    return list
+}

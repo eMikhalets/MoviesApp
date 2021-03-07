@@ -24,6 +24,11 @@ interface MovieDetailsNavigation {
     fun navigateFromMovieDetailsToReviewDetails(review: ResultReview)
     fun navigateFromMovieDetailsToReviewsList(movieId: Int)
     fun navigateFromMovieDetailsToSimilarMovieDetails(movieId: Int)
+    fun navigateFromMovieDetailsToImageZoom(imagePaths: ArrayList<String>, position: Int)
+}
+
+interface PersonDetailsNavigation {
+    fun navigateFromPersonDetailsToImageZoom(imagePaths: ArrayList<String>, position: Int)
 }
 
 interface ReviewListNavigation {

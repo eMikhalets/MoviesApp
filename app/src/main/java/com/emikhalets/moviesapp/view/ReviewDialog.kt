@@ -10,7 +10,7 @@ import coil.load
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.DialogReviewBinding
 import com.emikhalets.moviesapp.model.pojo.ResultReview
-import com.emikhalets.moviesapp.utils.buildLogoUrl500px
+import com.emikhalets.moviesapp.utils.buildProfile185px
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,9 +20,9 @@ class ReviewDialog : DialogFragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = DialogReviewBinding.inflate(inflater, container, false)
         return binding.root
@@ -40,11 +40,11 @@ class ReviewDialog : DialogFragment() {
     private fun setData(review: ResultReview?) {
         review?.let {
             with(binding) {
-                imageAvatar.load(it.author_details.avatar_path?.let { path -> buildLogoUrl500px(path) })
+                imageAvatar.load(it.author_details.avatar_path?.let { path -> buildProfile185px(path) })
                 textName.text = it.author
                 textRating.text = getString(
-                    R.string.text_rating,
-                    it.author_details.rating?.toInt()
+                        R.string.text_rating,
+                        it.author_details.rating?.toInt()
                 )
                 textUpdated.text = formatDate(it.updated_at)
                 textContent.text = it.content

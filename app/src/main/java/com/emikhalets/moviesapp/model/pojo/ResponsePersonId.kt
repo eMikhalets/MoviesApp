@@ -20,7 +20,7 @@ data class ResponsePersonId(
         @SerialName("name")
         val name: String?,
         @SerialName("place_of_birth")
-        val place_of_birth: String,
+        val place_of_birth: String?,
         @SerialName("profile_path")
         val profile_path: String?,
         @SerialName("images")

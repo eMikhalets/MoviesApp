@@ -8,7 +8,7 @@ import com.emikhalets.moviesapp.model.pojo.ResultReview
 import com.emikhalets.moviesapp.utils.*
 
 class MainActivity : AppCompatActivity(), HomeNavigation, MovieDetailsNavigation,
-        ReviewListNavigation, PersonListNavigation, MoviesListNavigation {
+        ReviewListNavigation, PersonListNavigation, MoviesListNavigation, PersonDetailsNavigation {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -114,11 +114,27 @@ class MainActivity : AppCompatActivity(), HomeNavigation, MovieDetailsNavigation
                 .commit()
     }
 
+    override fun navigateFromMovieDetailsToImageZoom(imagePaths: ArrayList<String>, position: Int) {
+        supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, ImageZoomPagerFragment.newInstance(imagePaths, position))
+                .addToBackStack(BACK_STACK)
+                .commit()
+    }
+
     // From Review List page navigation
 
     override fun navigateFromReviewListToReviewDetails(review: ResultReview) {
         supportFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, ReviewDialog.newInstance(review))
+                .addToBackStack(BACK_STACK)
+                .commit()
+    }
+
+    // From Person Details page navigation
+
+    override fun navigateFromPersonDetailsToImageZoom(imagePaths: ArrayList<String>, position: Int) {
+        supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, ImageZoomPagerFragment.newInstance(imagePaths, position))
                 .addToBackStack(BACK_STACK)
                 .commit()
     }

@@ -10,7 +10,7 @@ import coil.transform.RoundedCornersTransformation
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.ItemReviewBinding
 import com.emikhalets.moviesapp.model.pojo.ResultReview
-import com.emikhalets.moviesapp.utils.buildProfileUrl185px
+import com.emikhalets.moviesapp.utils.buildProfile185px
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,7 +35,7 @@ class ReviewsAdapter(
 
         fun bind(item: ResultReview) {
             with(binding) {
-                imageAvatar.load(item.author_details.avatar_path?.let { buildProfileUrl185px(it) }) {
+                imageAvatar.load(item.author_details.avatar_path?.let { buildProfile185px(it) }) {
                     crossfade(500)
                     placeholder(R.drawable.ph_avatar)
                     fallback(R.drawable.ph_avatar)

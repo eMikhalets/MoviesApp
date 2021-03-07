@@ -9,11 +9,11 @@ import coil.load
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.ItemImageBinding
 import com.emikhalets.moviesapp.model.pojo.Profile
-import com.emikhalets.moviesapp.utils.buildProfileUrl185px
+import com.emikhalets.moviesapp.utils.buildProfile185px
 import com.emikhalets.moviesapp.view.adapters.ImageAdapter.ViewHolder
 
 class ImageAdapter(
-    private val clickListener: (String) -> Unit
+        private val clickListener: (List<Profile>, Int) -> Unit
 ) : ListAdapter<Profile, ViewHolder>(ImageDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,15 +22,15 @@ class ImageAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
-        holder.itemView.setOnClickListener { clickListener.invoke(getItem(position).file_path) }
+        holder.itemView.setOnClickListener { clickListener.invoke(currentList, position) }
     }
 
     class ViewHolder(private val binding: ItemImageBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+            RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Profile) {
             with(binding) {
-                imageAvatar.load(buildProfileUrl185px(item.file_path)) {
+                imageAvatar.load(buildProfile185px(item.file_path)) {
                     placeholder(R.drawable.ph_avatar)
                     fallback(R.drawable.ph_avatar)
                 }

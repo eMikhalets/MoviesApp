@@ -10,7 +10,7 @@ import coil.transform.RoundedCornersTransformation
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.ItemCastBinding
 import com.emikhalets.moviesapp.model.pojo.Cast
-import com.emikhalets.moviesapp.utils.buildProfileUrl185px
+import com.emikhalets.moviesapp.utils.buildProfile185px
 
 class CastAdapter(
         private val imageCornerRadius: Float,
@@ -33,7 +33,7 @@ class CastAdapter(
 
         fun bind(item: Cast) {
             with(binding) {
-                imagePhoto.load(item.profile_path?.let { buildProfileUrl185px(it) }) {
+                imagePhoto.load(item.profile_path?.let { buildProfile185px(it) }) {
                     placeholder(R.drawable.ph_actor)
                     fallback(R.drawable.ph_actor)
                     transformations(RoundedCornersTransformation(imageCornerRadius))

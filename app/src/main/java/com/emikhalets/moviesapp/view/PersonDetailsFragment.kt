@@ -11,8 +11,11 @@ import androidx.fragment.app.activityViewModels
 import coil.load
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.FragmentPersonDetailsBinding
+import com.emikhalets.moviesapp.model.pojo.Profile
 import com.emikhalets.moviesapp.model.pojo.ResponsePersonId
-import com.emikhalets.moviesapp.utils.buildProfileUrl632px
+import com.emikhalets.moviesapp.utils.PersonDetailsNavigation
+import com.emikhalets.moviesapp.utils.buildProfile185px
+import com.emikhalets.moviesapp.utils.formatImagesList
 import com.emikhalets.moviesapp.view.adapters.ImageAdapter
 import com.emikhalets.moviesapp.viewmodel.PersonDetailsViewModel
 
@@ -21,13 +24,16 @@ class PersonDetailsFragment : Fragment() {
     private var _binding: FragmentPersonDetailsBinding? = null
     private val binding get() = _binding!!
 
+    private val navClickListener: PersonDetailsNavigation?
+        get() = requireActivity() as? PersonDetailsNavigation?
+
     private var imagesAdapter: ImageAdapter? = null
     private val personDetailsViewModel: PersonDetailsViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPersonDetailsBinding.inflate(inflater, container, false)
         return binding.root
@@ -44,16 +50,18 @@ class PersonDetailsFragment : Fragment() {
             }
         }
 
-        personDetailsViewModel.person.observe(viewLifecycleOwner, { personData ->
-            setData(personData)
-            imagesAdapter?.submitList(personData.images.profiles)
-        })
-        personDetailsViewModel.uiVisibility.observe(viewLifecycleOwner, { isDataLoaded ->
-            setInterfaceVisibility(isDataLoaded, personDetailsViewModel.getPerson())
-        })
-        personDetailsViewModel.notice.observe(viewLifecycleOwner, { msg ->
-            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
-        })
+        with(personDetailsViewModel) {
+            person.observe(viewLifecycleOwner, { personData ->
+                setData(personData)
+                imagesAdapter?.submitList(personData.images.profiles)
+            })
+            uiVisibility.observe(viewLifecycleOwner, { isDataLoaded ->
+                setInterfaceVisibility(isDataLoaded)
+            })
+            notice.observe(viewLifecycleOwner, { msg ->
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+            })
+        }
     }
 
     override fun onDestroyView() {
@@ -63,7 +71,7 @@ class PersonDetailsFragment : Fragment() {
     }
 
     private fun initRecyclerAdapters() {
-        imagesAdapter = ImageAdapter { onImageClick(it) }
+        imagesAdapter = ImageAdapter { list, pos -> onImageClick(list, pos) }
         binding.listImages.apply {
             adapter = imagesAdapter
             isNestedScrollingEnabled = false
@@ -71,32 +79,41 @@ class PersonDetailsFragment : Fragment() {
     }
 
     private fun onImageClick(path: String) {
+        val list = formatImagesList(path)
+        navClickListener?.navigateFromPersonDetailsToImageZoom(list, 0)
+    }
+
+    private fun onImageClick(snapshot: List<Profile>, position: Int) {
+        val list = formatImagesList(snapshot)
+        navClickListener?.navigateFromPersonDetailsToImageZoom(list, position)
     }
 
     private fun setData(data: ResponsePersonId) {
         with(binding) {
-            imagePerson.load(data.profile_path?.let { buildProfileUrl632px(it) }) {
+            imagePerson.load(data.profile_path?.let { buildProfile185px(it) }) {
                 fallback(R.drawable.ph_actor)
             }
             textName.text = data.name
             textDepartment.text = data.known_for_department
             textBirthday.text = getString(
-                R.string.text_birthday,
-                data.birthday
+                    R.string.text_birthday,
+                    data.birthday
             )
             textDeathday.text = getString(
-                R.string.text_deathday,
-                data.deathday
+                    R.string.text_deathday,
+                    data.deathday
             )
             textPlaceBirth.text = getString(
-                R.string.text_place_birth,
-                data.place_of_birth
+                    R.string.text_place_birth,
+                    data.place_of_birth
             )
             textBiographyContent.text = data.biography
+
+            imagePerson.setOnClickListener { data.profile_path?.let { img -> onImageClick(img) } }
         }
     }
 
-    private fun setInterfaceVisibility(bool: Boolean, data: ResponsePersonId?) {
+    private fun setInterfaceVisibility(bool: Boolean) {
         val duration = 500L
         with(binding) {
             pbLoadingData.animate().alpha(alpha(!bool)).setDuration(duration).start()

@@ -10,7 +10,7 @@ import coil.transform.RoundedCornersTransformation
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.ItemMovieBinding
 import com.emikhalets.moviesapp.model.pojo.ResultMovieList
-import com.emikhalets.moviesapp.utils.buildPosterUrl185px
+import com.emikhalets.moviesapp.utils.buildPoster185px
 import com.emikhalets.moviesapp.view.adapters.MoviesListAdapter.ViewHolder
 
 class MoviesListAdapter(
@@ -34,7 +34,7 @@ class MoviesListAdapter(
 
         fun bind(item: ResultMovieList) {
             with(binding) {
-                imagePoster.load(item.poster_path?.let { buildPosterUrl185px(it) }) {
+                imagePoster.load(item.poster_path?.let { buildPoster185px(it) }) {
                     crossfade(500)
                     placeholder(R.drawable.ph_actor)
                     fallback(R.drawable.ph_actor)

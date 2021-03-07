@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.FragmentCastPagerBinding
-import com.emikhalets.moviesapp.view.adapters.CastPagerAdapter
 import com.emikhalets.moviesapp.viewmodel.CastPagerViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -22,9 +22,9 @@ class CastPagerFragment : Fragment() {
     private val castPagerViewModel: CastPagerViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCastPagerBinding.inflate(inflater, container, false)
         return binding.root
@@ -85,6 +85,20 @@ class CastPagerFragment : Fragment() {
             val fragment = CastPagerFragment()
             fragment.arguments = bundle
             return fragment
+        }
+    }
+
+    class CastPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+
+        override fun getItemCount(): Int {
+            return 2
+        }
+
+        override fun createFragment(position: Int): Fragment {
+            return when (position) {
+                0 -> CastListFragment.newInstance(0)
+                else -> CastListFragment.newInstance(1)
+            }
         }
     }
 }

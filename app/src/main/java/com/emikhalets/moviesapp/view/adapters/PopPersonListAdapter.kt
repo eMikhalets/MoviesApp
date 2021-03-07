@@ -10,7 +10,7 @@ import coil.transform.RoundedCornersTransformation
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.ItemCastBinding
 import com.emikhalets.moviesapp.model.pojo.ResultPopArtist
-import com.emikhalets.moviesapp.utils.buildProfileUrl185px
+import com.emikhalets.moviesapp.utils.buildProfile185px
 import com.emikhalets.moviesapp.view.adapters.PopPersonListAdapter.ViewHolder
 
 class PopPersonListAdapter(
@@ -38,7 +38,7 @@ class PopPersonListAdapter(
 
         fun bind(item: ResultPopArtist) {
             with(binding) {
-                imagePhoto.load(buildProfileUrl185px(item.profile_path)) {
+                imagePhoto.load(buildProfile185px(item.profile_path)) {
                     placeholder(R.drawable.ph_actor)
                     fallback(R.drawable.ph_actor)
                     transformations(RoundedCornersTransformation(imageCornerRadius))

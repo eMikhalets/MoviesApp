@@ -16,8 +16,9 @@ import com.emikhalets.moviesapp.databinding.FragmentMovieDetailsBinding
 import com.emikhalets.moviesapp.model.pojo.ResponseMovieId
 import com.emikhalets.moviesapp.model.pojo.ResultReview
 import com.emikhalets.moviesapp.utils.MovieDetailsNavigation
-import com.emikhalets.moviesapp.utils.buildBackdropUrl1280px
-import com.emikhalets.moviesapp.utils.buildPosterUrl780px
+import com.emikhalets.moviesapp.utils.buildBackdrop780px
+import com.emikhalets.moviesapp.utils.buildPoster185px
+import com.emikhalets.moviesapp.utils.formatImagesList
 import com.emikhalets.moviesapp.view.adapters.CastAdapter
 import com.emikhalets.moviesapp.view.adapters.MoviesListAdapter
 import com.emikhalets.moviesapp.view.adapters.ReviewsAdapter
@@ -59,28 +60,26 @@ class MovieDetailsFragment : Fragment() {
             }
         }
 
-        movieDetailsViewModel.movie.observe(viewLifecycleOwner, { movieData ->
-            if (savedInstanceState == null) movieDetailsViewModel.loadOtherData()
-            setData(movieData)
-        })
-        movieDetailsViewModel.cast.observe(viewLifecycleOwner, { list ->
-            castAdapter?.submitList(list)
-        })
-        movieDetailsViewModel.reviews.observe(viewLifecycleOwner, { reviews ->
-            reviewsAdapter?.submitList(reviews)
-        })
-        movieDetailsViewModel.moviesSimilar.observe(viewLifecycleOwner, { list ->
-            moviesSimilarAdapter?.submitList(list)
-        })
-        movieDetailsViewModel.uiVisibility.observe(viewLifecycleOwner, { isDataLoaded ->
-            setInterfaceVisibility(isDataLoaded, movieDetailsViewModel.getMovie())
-        })
-        movieDetailsViewModel.notice.observe(viewLifecycleOwner, { msg ->
-            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
-        })
+        with(movieDetailsViewModel) {
+            movie.observe(viewLifecycleOwner, { movieData ->
+                if (savedInstanceState == null) movieDetailsViewModel.loadOtherData()
+                setData(movieData)
+            })
+            cast.observe(viewLifecycleOwner, { castAdapter?.submitList(it) })
+            reviews.observe(viewLifecycleOwner, { reviewsAdapter?.submitList(it) })
+            moviesSimilar.observe(viewLifecycleOwner, { moviesSimilarAdapter?.submitList(it) })
+            uiVisibility.observe(viewLifecycleOwner, { isDataLoaded ->
+                setInterfaceVisibility(isDataLoaded, movieDetailsViewModel.getMovie())
+            })
+            notice.observe(viewLifecycleOwner, { msg ->
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+            })
+        }
 
-        binding.textShowAllCast.setOnClickListener { navigateToCastList() }
-        binding.textShowAllReviews.setOnClickListener { navigateToReviewsList() }
+        with(binding) {
+            textShowAllCast.setOnClickListener { navigateToCastList() }
+            textShowAllReviews.setOnClickListener { navigateToReviewsList() }
+        }
     }
 
     override fun onDestroyView() {
@@ -137,12 +136,17 @@ class MovieDetailsFragment : Fragment() {
         navClickListener?.navigateFromMovieDetailsToSimilarMovieDetails(movieId)
     }
 
+    private fun onImageClick(path: String) {
+        val list = formatImagesList(path)
+        navClickListener?.navigateFromMovieDetailsToImageZoom(list, 0)
+    }
+
     private fun setData(data: ResponseMovieId) {
         with(binding) {
-            imageBackdrop.load(data.backdrop_path?.let { buildBackdropUrl1280px(it) }) {
+            imageBackdrop.load(data.backdrop_path?.let { buildBackdrop780px(it) }) {
                 fallback(R.drawable.ph_backdrop)
             }
-            imagePoster.load(data.poster_path?.let { buildPosterUrl780px(it) }) {
+            imagePoster.load(data.poster_path?.let { buildPoster185px(it) }) {
                 fallback(R.drawable.ph_poster)
             }
             textName.text = data.title
@@ -168,6 +172,9 @@ class MovieDetailsFragment : Fragment() {
                     R.string.text_money,
                     data.revenue
             )
+
+            imageBackdrop.setOnClickListener { data.backdrop_path?.let { img -> onImageClick(img) } }
+            imagePoster.setOnClickListener { data.poster_path?.let { img -> onImageClick(img) } }
         }
     }
 
