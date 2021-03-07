@@ -18,15 +18,24 @@
 
     <TextView
         android:id="@+id/text_discover_movies"
-        style="@style/Home.Text.MainLabel"
-        android:layout_width="match_parent"
+        style="@style/App.Text.VBig.Title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_margin="8dp"
+        android:gravity="center_horizontal"
         android:text="@string/home_label_discover_movies"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_dark_theme"
+        app:layout_constraintEnd_toStartOf="@+id/btn_dark_theme"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_dark_theme" />
+
+    <ImageButton
+        android:id="@+id/btn_dark_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_baseline_night"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
@@ -39,7 +48,7 @@
         app:cardCornerRadius="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_discover_movies">
+        app:layout_constraintTop_toBottomOf="@+id/btn_dark_theme">
 
         <SearchView
             android:id="@+id/searchView"
@@ -73,7 +82,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_search">
+        app:layout_constraintTop_toBottomOf="@+id/card_search"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -82,7 +92,7 @@
 
             <TextView
                 android:id="@+id/text_pop_artists_label"
-                style="@style/Home.Text.BlockLabel"
+                style="@style/App.Text.Big.Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -94,7 +104,7 @@
 
             <TextView
                 android:id="@+id/text_pop_artists_all"
-                style="@style/Home.Text.BlockShowAll"
+                style="@style/App.Text.Mid.Link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -116,7 +126,7 @@
 
             <TextView
                 android:id="@+id/text_pop_movies_label"
-                style="@style/Home.Text.BlockLabel"
+                style="@style/App.Text.Big.Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -129,7 +139,7 @@
 
             <TextView
                 android:id="@+id/text_pop_movies_all"
-                style="@style/Home.Text.BlockShowAll"
+                style="@style/App.Text.Mid.Link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -151,7 +161,7 @@
 
             <TextView
                 android:id="@+id/text_playing_movies_label"
-                style="@style/Home.Text.BlockLabel"
+                style="@style/App.Text.Big.Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -164,7 +174,7 @@
 
             <TextView
                 android:id="@+id/text_playing_movies_all"
-                style="@style/Home.Text.BlockShowAll"
+                style="@style/App.Text.Mid.Link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -186,7 +196,7 @@
 
             <TextView
                 android:id="@+id/text_top_movies_label"
-                style="@style/Home.Text.BlockLabel"
+                style="@style/App.Text.Big.Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -199,7 +209,7 @@
 
             <TextView
                 android:id="@+id/text_top_movies_all"
-                style="@style/Home.Text.BlockShowAll"
+                style="@style/App.Text.Mid.Link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -221,7 +231,7 @@
 
             <TextView
                 android:id="@+id/text_upcoming_movies_label"
-                style="@style/Home.Text.BlockLabel"
+                style="@style/App.Text.Big.Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -234,7 +244,7 @@
 
             <TextView
                 android:id="@+id/text_upcoming_movies_all"
-                style="@style/Home.Text.BlockShowAll"
+                style="@style/App.Text.Mid.Link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"

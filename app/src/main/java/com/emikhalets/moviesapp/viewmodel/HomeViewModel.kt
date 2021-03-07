@@ -41,6 +41,11 @@ class HomeViewModel : ViewModel() {
     val notice get(): LiveData<String> = _notice
 
     private var dataCounter = 0
+    var isNightMode = false
+        get() {
+            field = !field
+            return field
+        }
 
     var search: LiveData<PagedList<ResultMovieList>>? = null
 

@@ -24,8 +24,7 @@
             android:alpha="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:alpha="1" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/image_backdrop"
@@ -58,7 +57,7 @@
 
         <TextView
             android:id="@+id/text_name"
-            style="@style/Details.Text.Title"
+            style="@style/App.Text.VBig.Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -73,7 +72,7 @@
 
         <TextView
             android:id="@+id/text_age_rating"
-            style="@style/Details.Text.TitleContent"
+            style="@style/App.Text.Mid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -89,7 +88,7 @@
 
         <TextView
             android:id="@+id/text_year"
-            style="@style/Details.Text.TitleContent"
+            style="@style/App.Text.Mid"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -102,21 +101,19 @@
 
         <RatingBar
             android:id="@+id/ratingBar"
-            style="@style/Custom.RatingBar"
+            style="@style/App.RatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:alpha="0"
-            android:numStars="5"
-            android:stepSize="2"
             app:layout_constraintStart_toStartOf="@+id/text_name"
             app:layout_constraintTop_toBottomOf="@+id/text_age_rating"
             tools:alpha="1"
-            tools:rating="2.3" />
+            tools:rating="4" />
 
         <TextView
             android:id="@+id/text_rating"
-            style="@style/Details.Text.TitleContent"
+            style="@style/App.Text.Mid"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -131,7 +128,7 @@
 
         <TextView
             android:id="@+id/text_tags"
-            style="@style/Details.Text.TitleContent"
+            style="@style/App.Text.Mid"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -144,7 +141,7 @@
 
         <TextView
             android:id="@+id/text_runtime"
-            style="@style/Details.Text.TitleContent"
+            style="@style/App.Text.Mid"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -155,7 +152,7 @@
 
         <TextView
             android:id="@+id/text_story_label"
-            style="@style/Details.Text.SubTitle"
+            style="@style/App.Text.Big.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -169,7 +166,7 @@
 
         <TextView
             android:id="@+id/text_story"
-            style="@style/Details.Text.Content"
+            style="@style/App.Text.Mid"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -193,7 +190,7 @@
 
         <TextView
             android:id="@+id/text_details_label"
-            style="@style/Details.Text.SubTitle"
+            style="@style/App.Text.Big.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -205,7 +202,7 @@
 
         <TextView
             android:id="@+id/text_status"
-            style="@style/Details.Text.TitleDetails"
+            style="@style/App.Text.Mid.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -218,7 +215,7 @@
 
         <TextView
             android:id="@+id/text_status_content"
-            style="@style/Details.Text.Content"
+            style="@style/App.Text.Mid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -229,7 +226,7 @@
 
         <TextView
             android:id="@+id/text_budget"
-            style="@style/Details.Text.TitleDetails"
+            style="@style/App.Text.Mid.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -241,7 +238,7 @@
 
         <TextView
             android:id="@+id/text_budget_content"
-            style="@style/Details.Text.Content"
+            style="@style/App.Text.Mid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -252,7 +249,7 @@
 
         <TextView
             android:id="@+id/text_revenue"
-            style="@style/Details.Text.TitleDetails"
+            style="@style/App.Text.Mid.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -264,7 +261,7 @@
 
         <TextView
             android:id="@+id/text_revenue_content"
-            style="@style/Details.Text.Content"
+            style="@style/App.Text.Mid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -275,7 +272,7 @@
 
         <TextView
             android:id="@+id/text_cast_label"
-            style="@style/Details.Text.SubTitle"
+            style="@style/App.Text.Big.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -303,7 +300,7 @@
 
         <TextView
             android:id="@+id/text_show_all_cast"
-            style="@style/Details.Text.Link"
+            style="@style/App.Text.Mid.Link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -316,7 +313,7 @@
 
         <TextView
             android:id="@+id/text_reviews_label"
-            style="@style/Details.Text.SubTitle"
+            style="@style/App.Text.Big.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -344,7 +341,7 @@
 
         <TextView
             android:id="@+id/text_show_all_reviews"
-            style="@style/Details.Text.Link"
+            style="@style/App.Text.Mid.Link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -357,7 +354,7 @@
 
         <TextView
             android:id="@+id/text_similar_label"
-            style="@style/Details.Text.SubTitle"
+            style="@style/App.Text.Big.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

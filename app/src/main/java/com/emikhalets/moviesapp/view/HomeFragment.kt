@@ -1,14 +1,15 @@
 package com.emikhalets.moviesapp.view
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.emikhalets.moviesapp.databinding.FragmentHomeBinding
@@ -20,6 +21,7 @@ import com.emikhalets.moviesapp.view.adapters.HomePersonAdapter
 import com.emikhalets.moviesapp.view.adapters.MoviesListAdapter
 import com.emikhalets.moviesapp.view.adapters.MoviesPagerAdapter
 import com.emikhalets.moviesapp.viewmodel.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
@@ -51,18 +53,22 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerAdapters()
-        if (savedInstanceState == null) homeViewModel.loadData()
+        if (savedInstanceState == null) {
+            homeViewModel.isNightMode = requireActivity()
+                    .getSharedPreferences(SP_NAME, Activity.MODE_PRIVATE)
+                    .getBoolean(SP_THEME, false)
+            homeViewModel.loadData()
+        }
 
         with(homeViewModel) {
+            btn_dark_theme.setOnClickListener { onThemeChangeClick() }
             search?.observe(viewLifecycleOwner, { searchAdapter?.submitList(it) })
             popArtists.observe(viewLifecycleOwner, { personsAdapter?.submitList(it) })
             moviesPopular.observe(viewLifecycleOwner, { moviesPopularAdapter?.submitList(it) })
             moviesPlaying.observe(viewLifecycleOwner, { moviesNowPlayingAdapter?.submitList(it) })
             moviesTopRated.observe(viewLifecycleOwner, { moviesTopRatedAdapter?.submitList(it) })
             moviesUpcoming.observe(viewLifecycleOwner, { moviesUpcomingAdapter?.submitList(it) })
-            visibility.observe(viewLifecycleOwner, {
-                setInterfaceVisibility(it)
-            })
+            visibility.observe(viewLifecycleOwner, { setInterfaceVisibility(it) })
             notice.observe(viewLifecycleOwner, { msg ->
                 Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
             })
@@ -132,6 +138,14 @@ class HomeFragment : Fragment() {
                 adapter = moviesUpcomingAdapter
             }
         }
+    }
+
+    private fun onThemeChangeClick() {
+        val isNightMode = homeViewModel.isNightMode
+        if (isNightMode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        requireActivity().getSharedPreferences(SP_NAME, Activity.MODE_PRIVATE).edit()
+                .putBoolean(SP_THEME, isNightMode).apply()
     }
 
     private fun onSearchClick(): SearchView.OnQueryTextListener {
@@ -206,6 +220,9 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
+        private const val SP_NAME = "shared_preferences_name"
+        private const val SP_THEME = "shared_theme"
+
         fun newInstance(): HomeFragment {
             return HomeFragment()
         }

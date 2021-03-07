@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.emikhalets.moviesapp.databinding.FragmentCastListBinding
+import com.emikhalets.moviesapp.databinding.FragmentPersonListBinding
 import com.emikhalets.moviesapp.utils.PersonListNavigation
 import com.emikhalets.moviesapp.view.adapters.CastAdapter
 import com.emikhalets.moviesapp.view.adapters.CrewAdapter
@@ -17,7 +17,7 @@ import com.emikhalets.moviesapp.viewmodel.CastPagerViewModel
 
 class CastListFragment : Fragment() {
 
-    private var _binding: FragmentCastListBinding? = null
+    private var _binding: FragmentPersonListBinding? = null
     private val binding get() = _binding!!
 
     private val navClickListener: PersonListNavigation?
@@ -32,7 +32,7 @@ class CastListFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCastListBinding.inflate(inflater, container, false)
+        _binding = FragmentPersonListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -56,33 +56,35 @@ class CastListFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.listCast.adapter = null
+        binding.listPerson.adapter = null
         _binding = null
     }
 
     private fun initCastAdapter(imageCornerRadius: Float) {
         castAdapter = CastAdapter(imageCornerRadius) { onPersonClick(it) }
         with(binding) {
-            listCast.apply {
+            listPerson.apply {
                 setHasFixedSize(true)
                 adapter = castAdapter
             }
         }
         castPagerViewModel.cast.observe(viewLifecycleOwner, { list ->
             castAdapter?.submitList(list)
+            binding.listPerson.alpha = 1f
         })
     }
 
     private fun initCrewAdapter(imageCornerRadius: Float) {
         crewAdapter = CrewAdapter(imageCornerRadius) { onPersonClick(it) }
         with(binding) {
-            listCast.apply {
+            listPerson.apply {
                 setHasFixedSize(true)
                 adapter = crewAdapter
             }
         }
         castPagerViewModel.crew.observe(viewLifecycleOwner, { list ->
             crewAdapter?.submitList(list)
+            binding.listPerson.alpha = 1f
         })
     }
 

@@ -27,14 +27,12 @@
 
         <TextView
             android:id="@+id/text_title"
+            style="@style/App.Text.Mid.Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/text_date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -44,10 +42,9 @@
 
         <TextView
             android:id="@+id/text_date"
+            style="@style/App.Text.Mid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/ratingBar"
             app:layout_constraintStart_toStartOf="@+id/text_title"
             app:layout_constraintTop_toBottomOf="@+id/text_title"
@@ -55,24 +52,21 @@
 
         <RatingBar
             android:id="@+id/ratingBar"
-            style="@style/Custom.RatingBar"
+            style="@style/App.RatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:numStars="5"
-            android:stepSize="2"
             app:layout_constraintBottom_toBottomOf="@+id/image_poster"
             app:layout_constraintStart_toStartOf="@+id/text_title"
             app:layout_constraintTop_toBottomOf="@+id/text_date"
-            tools:rating="2.3" />
+            tools:rating="4" />
 
         <TextView
             android:id="@+id/text_rating"
+            style="@style/App.Text.Mid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:textColor="@color/black"
-            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
             app:layout_constraintStart_toEndOf="@+id/ratingBar"
             app:layout_constraintTop_toTopOf="@+id/ratingBar"
