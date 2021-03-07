@@ -1,6 +1,7 @@
 package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import coil.load
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.FragmentMovieDetailsBinding
@@ -34,7 +35,7 @@ class MovieDetailsFragment : Fragment() {
     private var reviewsAdapter: ReviewsAdapter? = null
     private var moviesSimilarAdapter: MoviesListAdapter? = null
 
-    private val movieDetailsViewModel: MovieDetailsViewModel by activityViewModels()
+    private val movieDetailsViewModel: MovieDetailsViewModel by viewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -47,6 +48,8 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("MovieDetailsFragment", "fragment: $this")
+        Log.d("MovieDetailsFragment", "viewModel: $movieDetailsViewModel")
 
         initRecyclerAdapters()
         if (savedInstanceState == null) {
