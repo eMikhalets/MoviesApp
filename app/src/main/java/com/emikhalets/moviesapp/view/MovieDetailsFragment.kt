@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
@@ -69,7 +70,7 @@ class MovieDetailsFragment : Fragment() {
             reviews.observe(viewLifecycleOwner, { reviewsAdapter?.submitList(it) })
             moviesSimilar.observe(viewLifecycleOwner, { moviesSimilarAdapter?.submitList(it) })
             uiVisibility.observe(viewLifecycleOwner, { isDataLoaded ->
-                setInterfaceVisibility(isDataLoaded, movieDetailsViewModel.getMovie())
+                setInterfaceVisibility(isDataLoaded)
             })
             notice.observe(viewLifecycleOwner, { msg ->
                 Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
@@ -150,14 +151,18 @@ class MovieDetailsFragment : Fragment() {
                 fallback(R.drawable.ph_poster)
             }
             textName.text = data.title
-//            textAgeRating.text =
+            val certification = data.certification
+            if (certification.isNotEmpty()) {
+                textAgeRating.text = data.certification
+                textAgeRating.isVisible = true
+            }
             textYear.text = movieDetailsViewModel.parseYear(data.release_date)
             ratingBar.rating = (data.vote_average / 2).toFloat()
             textRating.text = getString(
                     R.string.text_rating,
-                    data.vote_average.toInt()
+                    data.vote_average
             )
-            textTags.text = movieDetailsViewModel.parseGenres(data.genres)
+            textTags.text = data.genres
             textRuntime.text = getString(
                     R.string.text_runtime,
                     data.runtime
@@ -178,15 +183,21 @@ class MovieDetailsFragment : Fragment() {
         }
     }
 
-    private fun setInterfaceVisibility(bool: Boolean, data: ResponseMovieId?) {
+    private fun setInterfaceVisibility(bool: Boolean) {
         val duration = 500L
         with(binding) {
             pbLoadingData.animate().alpha(alpha(!bool)).setDuration(duration).start()
+            imageBackdrop.animate().alpha(alpha(bool)).setDuration(duration).start()
+            imagePoster.animate().alpha(alpha(bool)).setDuration(duration).start()
             textName.animate().alpha(alpha(bool)).setDuration(duration).start()
             textAgeRating.animate().alpha(alpha(bool)).setDuration(duration).start()
             textYear.animate().alpha(alpha(bool)).setDuration(duration).start()
             ratingBar.animate().alpha(alpha(bool)).setDuration(duration).start()
+            textRating.animate().alpha(alpha(bool)).setDuration(duration).start()
             textTags.animate().alpha(alpha(bool)).setDuration(duration).start()
+            textRuntime.animate().alpha(alpha(bool)).setDuration(duration).start()
+            textStoryLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
+            textStory.animate().alpha(alpha(bool)).setDuration(duration).start()
             textDetailsLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
             textStatus.animate().alpha(alpha(bool)).setDuration(duration).start()
             textStatusContent.animate().alpha(alpha(bool)).setDuration(duration).start()
@@ -202,22 +213,6 @@ class MovieDetailsFragment : Fragment() {
             textShowAllReviews.animate().alpha(alpha(bool)).setDuration(duration).start()
             textSimilarLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
             listSimilarMovies.animate().alpha(alpha(bool)).setDuration(duration).start()
-            data?.let {
-                it.backdrop_path?.let {
-                    imageBackdrop.animate().alpha(alpha(bool)).setDuration(duration).start()
-                }
-                it.poster_path?.let {
-                    imagePoster.animate().alpha(alpha(bool)).setDuration(duration).start()
-                }
-                it.overview?.let {
-                    textStory.animate().alpha(alpha(bool)).setDuration(duration).start()
-                    textStoryLabel.animate().alpha(alpha(bool)).setDuration(duration).start()
-                }
-                it.runtime?.let {
-                    textRuntime.animate().alpha(alpha(bool)).setDuration(duration).start()
-                }
-                textRuntime.animate().alpha(alpha(bool)).setDuration(duration).start()
-            }
         }
     }
 

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MoviesApp</string>
 
-    <string name="text_rating">%d / 10</string>
+    <string name="text_rating">%.2f / 10</string>
     <string name="text_runtime">%d min</string>
     <string name="text_money">%d $</string>
     <string name="text_birthday">Birthday: %s</string>

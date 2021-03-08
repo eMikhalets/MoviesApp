@@ -21,6 +21,13 @@
         <item name="android:thumb">@null</item>
     </style>
 
+    <style name="App.AgeRating">
+        <item name="android:background">@drawable/bg_age_rating</item>
+        <item name="android:textColor">@color/color_text</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="App.Text" />
 
     <style name="App.Text.VBig">

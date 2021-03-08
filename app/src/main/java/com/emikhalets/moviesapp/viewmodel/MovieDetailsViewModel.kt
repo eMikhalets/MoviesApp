@@ -97,12 +97,4 @@ class MovieDetailsViewModel : ViewModel() {
             "No year"
         }
     }
-
-    fun parseGenres(genres: List<Genre>): String {
-        return genres.joinToString { it.name }
-    }
-
-    fun getMovie(): ResponseMovieId? {
-        return _movie.value
-    }
 }

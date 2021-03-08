@@ -9,12 +9,10 @@ data class ResponseMovieId(
         val adult: Boolean,
         @SerialName("backdrop_path")
         val backdrop_path: String?,
-        @SerialName("belongs_to_collection")
-        val belongs_to_collection: BelongsToCollection?,
         @SerialName("budget")
         val budget: Int,
         @SerialName("genres")
-        val genres: List<Genre>,
+        private val genresList: List<Genre>,
         @SerialName("id")
         val id: Int,
         @SerialName("imdb_id")
@@ -27,10 +25,6 @@ data class ResponseMovieId(
         val overview: String?,
         @SerialName("poster_path")
         val poster_path: String?,
-        @SerialName("production_companies")
-        val production_companies: List<ProductionCompany>,
-        @SerialName("production_countries")
-        val production_countries: List<ProductionCountry>,
         @SerialName("release_date")
         val release_date: String,
         @SerialName("revenue")
@@ -48,5 +42,15 @@ data class ResponseMovieId(
         @SerialName("vote_average")
         val vote_average: Double,
         @SerialName("vote_count")
-        val vote_count: Int
-)
+        val vote_count: Int,
+        @SerialName("release_dates")
+        private val release_dates: ReleaseDates
+) {
+    val genres: String
+        get() = genresList.joinToString { it.name }
+
+    val certification: String
+        get() = release_dates.results.find { it.iso_3166_1 == "RU" }?.release_dates?.first()?.certification
+                ?: release_dates.results.find { it.iso_3166_1 == "US" }?.release_dates?.first()?.certification
+                ?: ""
+}
