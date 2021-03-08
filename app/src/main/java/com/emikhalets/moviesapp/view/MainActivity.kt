@@ -2,6 +2,7 @@ package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.ActivityMainBinding
 import com.emikhalets.moviesapp.model.pojo.ResultReview
@@ -22,121 +23,84 @@ class MainActivity : AppCompatActivity(), HomeNavigation, MovieDetailsNavigation
                 .commit()
     }
 
-    // From Home page navigation
-
-    override fun navigateFromHomeToSearchMovie(movieId: Int) {
+    private fun navigate(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, MovieDetailsFragment.newInstance(movieId))
+                .setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out)
+                .add(R.id.fragment_container, fragment)
                 .addToBackStack(BACK_STACK)
                 .commit()
+    }
+
+    // ================== From Home page navigation
+
+    override fun navigateFromHomeToSearchMovie(movieId: Int) {
+        navigate(MovieDetailsFragment.newInstance(movieId))
     }
 
     override fun navigateFromHomeToPersonDetails(personId: Int) {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, PersonDetailsFragment.newInstance(personId))
-                .addToBackStack(BACK_STACK)
-                .commit()
+        navigate(PersonDetailsFragment.newInstance(personId))
     }
 
     override fun navigateFromHomeToAllPersons() {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, PersonListFragment.newInstance())
-                .addToBackStack(BACK_STACK)
-                .commit()
+        navigate(PersonListFragment.newInstance())
     }
 
     override fun navigateFromHomeToMovieDetails(movieId: Int) {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, MovieDetailsFragment.newInstance(movieId))
-                .addToBackStack(BACK_STACK)
-                .commit()
+        navigate(MovieDetailsFragment.newInstance(movieId))
     }
 
     override fun navigateFromHomeToAllMovies(query: MovieQueries) {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, MovieListFragment.newInstance(query))
-                .addToBackStack(BACK_STACK)
-                .commit()
+        navigate(MovieListFragment.newInstance(query))
     }
 
-    // From Person List page navigation
+    // ================== From Person List page navigation
 
     override fun navigateFromPersonListToPersonDetails(personId: Int) {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, PersonDetailsFragment.newInstance(personId))
-                .addToBackStack(BACK_STACK)
-                .commit()
+        navigate(PersonDetailsFragment.newInstance(personId))
     }
 
-    // From Movie List page navigation
+    // ================== From Movie List page navigation
 
     override fun navigateFromMoviesListToMoviesDetails(movieId: Int) {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, MovieDetailsFragment.newInstance(movieId))
-                .addToBackStack(BACK_STACK)
-                .commit()
+        navigate(MovieDetailsFragment.newInstance(movieId))
     }
 
-    // From Movie Details page navigation
+    // ================== From Movie Details page navigation
 
     override fun navigateFromMovieDetailsToPersonDetails(personId: Int) {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, PersonDetailsFragment.newInstance(personId))
-                .addToBackStack(BACK_STACK)
-                .commit()
+        navigate(PersonDetailsFragment.newInstance(personId))
     }
 
     override fun navigateFromMovieDetailsToPersonList(movieId: Int) {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, CastPagerFragment.newInstance(movieId))
-                .addToBackStack(BACK_STACK)
-                .commit()
+        navigate(CastPagerFragment.newInstance(movieId))
     }
 
     override fun navigateFromMovieDetailsToReviewDetails(review: ResultReview) {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, ReviewDialog.newInstance(review))
-                .addToBackStack(BACK_STACK)
-                .commit()
+        navigate(ReviewDialog.newInstance(review))
     }
 
     override fun navigateFromMovieDetailsToReviewsList(movieId: Int) {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, ReviewListFragment.newInstance(movieId))
-                .addToBackStack(BACK_STACK)
-                .commit()
+        navigate(ReviewListFragment.newInstance(movieId))
     }
 
     override fun navigateFromMovieDetailsToSimilarMovieDetails(movieId: Int) {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, MovieDetailsFragment.newInstance(movieId))
-                .addToBackStack(BACK_STACK)
-                .commit()
+        navigate(MovieDetailsFragment.newInstance(movieId))
     }
 
-    override fun navigateFromMovieDetailsToImageZoom(imagePaths: ArrayList<String>, position: Int) {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, ImageZoomPagerFragment.newInstance(imagePaths, position))
-                .addToBackStack(BACK_STACK)
-                .commit()
+    override fun navigateFromMovieDetailsToImageZoom(paths: ArrayList<String>, position: Int) {
+        navigate(ImageZoomPagerFragment.newInstance(paths, position))
     }
 
-    // From Review List page navigation
+    // ================== From Review List page navigation
 
     override fun navigateFromReviewListToReviewDetails(review: ResultReview) {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, ReviewDialog.newInstance(review))
-                .addToBackStack(BACK_STACK)
-                .commit()
+        navigate(ReviewDialog.newInstance(review))
     }
 
-    // From Person Details page navigation
+    // ================== From Person Details page navigation
 
-    override fun navigateFromPersonDetailsToImageZoom(imagePaths: ArrayList<String>, position: Int) {
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, ImageZoomPagerFragment.newInstance(imagePaths, position))
-                .addToBackStack(BACK_STACK)
-                .commit()
+    override fun navigateFromPersonDetailsToImageZoom(paths: ArrayList<String>, position: Int) {
+        navigate(ImageZoomPagerFragment.newInstance(paths, position))
     }
 
     companion object {
