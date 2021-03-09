@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">MoviesApp</string>
+
+    <string name="variable_place_birth">Место рождения: %s</string>
+    <string name="variable_birthday">День рождения: %s</string>
+    <string name="variable_deathday">День смерти: %s</string>
+    <string name="variable_runtime">%d мин</string>
+
+    <string name="label_discover_movies">Исследуйте фильмы в TMDB</string>
+    <string name="label_popular_artists">Популярные персоны</string>
+    <string name="label_upcoming_movies">Скоро выйдут</string>
+    <string name="label_popular_movies">Популярные</string>
+    <string name="label_playing_movies">В кинотеарах</string>
+    <string name="label_top_movies">Лучшие</string>
+    <string name="label_biography">Биография</string>
+    <string name="label_details">Подробности</string>
+    <string name="label_similar">Похожие</string>
+    <string name="label_reviews">Отзывы</string>
+    <string name="label_images">Фотографии</string>
+    <string name="label_story">Описание</string>
+    <string name="label_cast">Актеры</string>
+
+    <string name="title_revenue">Сборы:</string>
+    <string name="title_status">Статус:</string>
+    <string name="title_budget">Бюджет:</string>
+    <string name="text_show_all">Показать все</string>
+    <string name="hint_search">Поиск по названию фильма</string>
+
+    <string name="cast_full_tab_cast">Актеры</string>
+    <string name="cast_full_tab_crew">Команда</string>
+</resources>

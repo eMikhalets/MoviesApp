@@ -10,6 +10,7 @@
 
     <color name="background">#212121</color>
     <color name="background_age_rating">#ff424242</color>
+    <color name="background_icon">#dee8e1</color>
     <color name="color_text_link">@color/white</color>
     <color name="color_text">#e0e0e0</color>
 </resources>

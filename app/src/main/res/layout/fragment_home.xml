@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:gravity="center_horizontal"
-        android:text="@string/home_label_discover_movies"
+        android:text="@string/label_discover_movies"
         app:layout_constraintBottom_toBottomOf="@+id/btn_dark_theme"
         app:layout_constraintEnd_toStartOf="@+id/btn_dark_theme"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,8 @@
         android:layout_margin="8dp"
         android:src="@drawable/ic_baseline_night"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_search"
@@ -55,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:iconifiedByDefault="false"
-            android:queryHint="@string/home_hint_search" />
+            android:queryHint="@string/hint_search" />
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -97,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="@string/home_label_popular_artists"
+                android:text="@string/label_popular_artists"
                 app:layout_constraintEnd_toStartOf="@+id/text_pop_artists_all"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -108,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="@string/home_text_show_all"
+                android:text="@string/text_show_all"
                 app:layout_constraintBottom_toBottomOf="@+id/text_pop_artists_label"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -132,7 +133,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="@dimen/home_list_block_margin_top"
                 android:layout_marginEnd="8dp"
-                android:text="@string/home_label_popular_movies"
+                android:text="@string/label_popular_movies"
                 app:layout_constraintEnd_toStartOf="@+id/text_pop_movies_all"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/list_pop_artists" />
@@ -143,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="@string/home_text_show_all"
+                android:text="@string/text_show_all"
                 app:layout_constraintBottom_toBottomOf="@+id/text_pop_movies_label"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -167,7 +168,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="@dimen/home_list_block_margin_top"
                 android:layout_marginEnd="8dp"
-                android:text="@string/home_label_playing_movies"
+                android:text="@string/label_playing_movies"
                 app:layout_constraintEnd_toStartOf="@+id/text_playing_movies_all"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/list_pop_movies" />
@@ -178,7 +179,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="@string/home_text_show_all"
+                android:text="@string/text_show_all"
                 app:layout_constraintBottom_toBottomOf="@+id/text_playing_movies_label"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -202,7 +203,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="@dimen/home_list_block_margin_top"
                 android:layout_marginEnd="8dp"
-                android:text="@string/home_label_top_movies"
+                android:text="@string/label_top_movies"
                 app:layout_constraintEnd_toStartOf="@+id/text_top_movies_all"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/list_playing_movies" />
@@ -213,7 +214,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="@string/home_text_show_all"
+                android:text="@string/text_show_all"
                 app:layout_constraintBottom_toBottomOf="@+id/text_top_movies_label"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -237,7 +238,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="@dimen/home_list_block_margin_top"
                 android:layout_marginEnd="8dp"
-                android:text="@string/home_label_upcoming_movies"
+                android:text="@string/label_upcoming_movies"
                 app:layout_constraintEnd_toStartOf="@+id/text_upcoming_movies_all"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/list_top_movies" />
@@ -248,7 +249,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="@string/home_text_show_all"
+                android:text="@string/text_show_all"
                 app:layout_constraintBottom_toBottomOf="@+id/text_upcoming_movies_label"
                 app:layout_constraintEnd_toEndOf="parent" />
 

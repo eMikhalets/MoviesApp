@@ -43,7 +43,7 @@ class ReviewDialog : DialogFragment() {
                 imageAvatar.load(it.author_details.avatar_path?.let { path -> buildProfile185px(path) })
                 textName.text = it.author
                 textRating.text = getString(
-                        R.string.text_rating,
+                        R.string.variable_rating,
                         it.author_details.rating
                 )
                 textUpdated.text = formatDate(it.updated_at)

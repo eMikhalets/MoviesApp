@@ -43,7 +43,7 @@ class ReviewsAdapter(
                 }
                 textName.text = item.author
                 textRating.text = itemView.context.getString(
-                    R.string.text_rating,
+                    R.string.variable_rating,
                     item.author_details.rating
                 )
                 textUpdated.text = formatDate(item.updated_at)

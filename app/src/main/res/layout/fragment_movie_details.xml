@@ -161,7 +161,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:alpha="0"
-            android:text="@string/details_text_story"
+            android:text="@string/label_story"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_poster"
@@ -198,7 +198,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:alpha="0"
-            android:text="@string/details_text_details"
+            android:text="@string/label_details"
             app:layout_constraintStart_toStartOf="@+id/text_story_label"
             app:layout_constraintTop_toBottomOf="@+id/text_story"
             tools:alpha="1" />
@@ -211,7 +211,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="8dp"
             android:alpha="0"
-            android:text="@string/details_text_status"
+            android:text="@string/title_status"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_details_label"
             tools:alpha="1" />
@@ -234,7 +234,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:alpha="0"
-            android:text="@string/details_text_budget"
+            android:text="@string/title_budget"
             app:layout_constraintStart_toStartOf="@+id/text_status"
             app:layout_constraintTop_toBottomOf="@+id/text_status"
             tools:alpha="1" />
@@ -257,7 +257,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:alpha="0"
-            android:text="@string/details_text_revenue"
+            android:text="@string/title_revenue"
             app:layout_constraintStart_toStartOf="@+id/text_budget"
             app:layout_constraintTop_toBottomOf="@+id/text_budget"
             tools:alpha="1" />
@@ -280,7 +280,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:alpha="0"
-            android:text="@string/details_text_cast"
+            android:text="@string/label_cast"
             app:layout_constraintStart_toStartOf="@+id/text_story_label"
             app:layout_constraintTop_toBottomOf="@+id/text_revenue_content"
             tools:alpha="1" />
@@ -309,7 +309,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:alpha="0"
-            android:text="@string/details_text_show"
+            android:text="@string/text_show_all"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/list_cast"
             tools:alpha="1" />
@@ -321,7 +321,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:alpha="0"
-            android:text="@string/details_text_reviews"
+            android:text="@string/label_reviews"
             app:layout_constraintStart_toStartOf="@+id/text_story_label"
             app:layout_constraintTop_toBottomOf="@+id/text_show_all_cast"
             tools:alpha="1" />
@@ -350,7 +350,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:alpha="0"
-            android:text="@string/details_text_show"
+            android:text="@string/text_show_all"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/list_reviews"
             tools:alpha="1" />
@@ -362,7 +362,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:alpha="0"
-            android:text="@string/details_text_similar"
+            android:text="@string/label_similar"
             app:layout_constraintStart_toStartOf="@+id/text_story_label"
             app:layout_constraintTop_toBottomOf="@+id/text_show_all_reviews"
             tools:alpha="1" />

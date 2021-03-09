@@ -47,7 +47,7 @@ class MoviesPagerAdapter(
                 textTitle.text = item.title
                 textDate.text = item.release_date?.let { parseYear(it) }
                 textRating.text = root.context.getString(
-                        R.string.text_rating,
+                        R.string.variable_rating,
                         item.vote_average.toInt()
                 )
                 ratingBar.rating = item.vote_average.toFloat() / 2

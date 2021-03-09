@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import coil.load
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.FragmentPersonDetailsBinding
@@ -28,7 +28,7 @@ class PersonDetailsFragment : Fragment() {
         get() = requireActivity() as? PersonDetailsNavigation?
 
     private var imagesAdapter: ImageAdapter? = null
-    private val personDetailsViewModel: PersonDetailsViewModel by activityViewModels()
+    private val personDetailsViewModel: PersonDetailsViewModel by viewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -96,15 +96,15 @@ class PersonDetailsFragment : Fragment() {
             textName.text = data.name
             textDepartment.text = data.known_for_department
             textBirthday.text = getString(
-                    R.string.text_birthday,
+                    R.string.variable_birthday,
                     data.birthday
             )
             textDeathday.text = getString(
-                    R.string.text_deathday,
+                    R.string.variable_deathday,
                     data.deathday
             )
             textPlaceBirth.text = getString(
-                    R.string.text_place_birth,
+                    R.string.variable_place_birth,
                     data.place_of_birth
             )
             textBiographyContent.text = data.biography

@@ -159,22 +159,22 @@ class MovieDetailsFragment : Fragment() {
             textYear.text = movieDetailsViewModel.parseYear(data.release_date)
             ratingBar.rating = (data.vote_average / 2).toFloat()
             textRating.text = getString(
-                    R.string.text_rating,
+                    R.string.variable_rating,
                     data.vote_average
             )
             textTags.text = data.genres
             textRuntime.text = getString(
-                    R.string.text_runtime,
+                    R.string.variable_runtime,
                     data.runtime
             )
             textStory.text = data.overview
             textStatusContent.text = data.status
             textBudgetContent.text = getString(
-                    R.string.text_money,
+                    R.string.variable_money,
                     data.budget
             )
             textRevenueContent.text = getString(
-                    R.string.text_money,
+                    R.string.variable_money,
                     data.revenue
             )
 
