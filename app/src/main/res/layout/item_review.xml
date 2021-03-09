@@ -21,10 +21,10 @@
             android:layout_height="70dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
+            android:src="@drawable/ph_avatar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/ph_avatar" />
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/text_name"
@@ -56,7 +56,7 @@
             style="@style/App.Text.Mid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/image_star"
             app:layout_constraintStart_toEndOf="@+id/image_star"
             app:layout_constraintTop_toTopOf="@+id/image_star"
@@ -68,8 +68,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/image_avatar"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="2017-02-13" />
 

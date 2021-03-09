@@ -29,20 +29,6 @@ fun buildPoster780px(path: String) = "https://image.tmdb.org/t/p/w780/$path"
  */
 fun buildProfile185px(path: String) = "https://image.tmdb.org/t/p/w185/$path"
 
-/**
- * Builds a url to request profile of movie with width = 632 px
- */
-fun buildProfile632px(path: String) = "https://image.tmdb.org/t/p/w632/$path"
-
-//suspend fun <T> safeDatabaseCall(call: suspend () -> T): DbResult<T> =
-//    try {
-//        val result = call.invoke()
-//        DbResult.Success(result)
-//    } catch (ex: Exception) {
-//        ex.printStackTrace()
-//        DbResult.Error(ex.message ?: "", ex)
-//    }
-
 suspend fun <T> safeNetworkCall(call: suspend () -> T): ApiResult<T> =
         try {
             val result = call.invoke()

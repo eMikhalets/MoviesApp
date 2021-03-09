@@ -1,7 +1,6 @@
 package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -50,9 +49,6 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("MovieDetailsFragment", "fragment: $this")
-        Log.d("MovieDetailsFragment", "viewModel: $movieDetailsViewModel")
-
         initRecyclerAdapters()
         if (savedInstanceState == null) {
             arguments?.let {
@@ -69,9 +65,7 @@ class MovieDetailsFragment : Fragment() {
             cast.observe(viewLifecycleOwner, { castAdapter?.submitList(it) })
             reviews.observe(viewLifecycleOwner, { reviewsAdapter?.submitList(it) })
             moviesSimilar.observe(viewLifecycleOwner, { moviesSimilarAdapter?.submitList(it) })
-            uiVisibility.observe(viewLifecycleOwner, { isDataLoaded ->
-                setInterfaceVisibility(isDataLoaded)
-            })
+            uiVisibility.observe(viewLifecycleOwner, { setInterfaceVisibility(it) })
             notice.observe(viewLifecycleOwner, { msg ->
                 Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
             })
@@ -126,7 +120,7 @@ class MovieDetailsFragment : Fragment() {
     }
 
     private fun onReviewClick(review: ResultReview) {
-        navClickListener?.navigateFromMovieDetailsToReviewDetails(review)
+        if (!this.isHidden) navClickListener?.navigateFromMovieDetailsToReviewDetails(review)
     }
 
     private fun navigateToReviewsList() {
@@ -160,7 +154,7 @@ class MovieDetailsFragment : Fragment() {
             ratingBar.rating = (data.vote_average / 2).toFloat()
             textRating.text = getString(
                     R.string.variable_rating,
-                    data.vote_average
+                    data.vote_average.toString()
             )
             textTags.text = data.genres
             textRuntime.text = getString(

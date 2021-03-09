@@ -5,7 +5,7 @@
     <string name="variable_birthday">Birthday: %s</string>
     <string name="variable_deathday">Deathday: %s</string>
     <string name="variable_runtime">%d min</string>
-    <string name="variable_rating" translatable="false">%.2f / 10</string>
+    <string name="variable_rating" translatable="false">%s / 10</string>
     <string name="variable_money" translatable="false">%d $</string>
 
     <string name="label_discover_movies">Discover movies in TMDB</string>
@@ -29,7 +29,7 @@
     <string name="hint_search">Search by movie name</string>
 
     <string name="item_cast_details_text_bottom" translatable="false">%s, %s</string>
-    <string name="item_movie_text_bottom" translatable="false">%.2f / %s</string>
+    <string name="item_movie_text_bottom" translatable="false">%s / %s</string>
 
     <string name="cast_full_tab_cast">Cast</string>
     <string name="cast_full_tab_crew">Crew</string>

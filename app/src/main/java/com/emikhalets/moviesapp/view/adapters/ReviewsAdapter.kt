@@ -15,8 +15,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ReviewsAdapter(
-    private val imageCornerRadius: Float,
-    private val clickListener: (ResultReview) -> Unit
+        private val imageCornerRadius: Float,
+        private val clickListener: (ResultReview) -> Unit
 ) : ListAdapter<ResultReview, ReviewsAdapter.ViewHolder>(ResultReviewDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,8 +29,8 @@ class ReviewsAdapter(
     }
 
     class ViewHolder(
-        private val binding: ItemReviewBinding,
-        private val imageCornerRadius: Float
+            private val binding: ItemReviewBinding,
+            private val imageCornerRadius: Float
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ResultReview) {
@@ -43,17 +43,21 @@ class ReviewsAdapter(
                 }
                 textName.text = item.author
                 textRating.text = itemView.context.getString(
-                    R.string.variable_rating,
-                    item.author_details.rating
+                        R.string.variable_rating,
+                        formatRating(item.author_details.rating)
                 )
                 textUpdated.text = formatDate(item.updated_at)
                 textContent.text = item.content
             }
         }
 
+        private fun formatRating(rating: Double?): String {
+            return rating?.toInt()?.toString() ?: "-"
+        }
+
         private fun formatDate(dateStr: String): String {
             val formatIn = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'", Locale.getDefault())
-            val formatOut = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())
+            val formatOut = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
             val date = formatIn.parse(dateStr) ?: Date()
             return formatOut.format(date)
         }

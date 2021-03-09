@@ -43,8 +43,8 @@ class MoviesListAdapter(
                 textTitle.text = item.title
                 textBottom.text = root.context.getString(
                         R.string.item_movie_text_bottom,
-                        item.vote_average,
-                    item.release_date?.let { parseYear(it) }
+                        item.vote_average.toString(),
+                        item.release_date?.let { parseYear(it) }
                 )
             }
         }

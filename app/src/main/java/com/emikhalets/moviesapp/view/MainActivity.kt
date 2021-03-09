@@ -2,6 +2,7 @@ package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.ActivityMainBinding
@@ -76,7 +77,8 @@ class MainActivity : AppCompatActivity(), HomeNavigation, MovieDetailsNavigation
     }
 
     override fun navigateFromMovieDetailsToReviewDetails(review: ResultReview) {
-        navigate(ReviewDialog.newInstance(review))
+        val dialog: DialogFragment = ReviewDialog.newInstance(review)
+        dialog.show(supportFragmentManager, DIALOG_REVIEW)
     }
 
     override fun navigateFromMovieDetailsToReviewsList(movieId: Int) {
@@ -94,7 +96,8 @@ class MainActivity : AppCompatActivity(), HomeNavigation, MovieDetailsNavigation
     // ================== From Review List page navigation
 
     override fun navigateFromReviewListToReviewDetails(review: ResultReview) {
-        navigate(ReviewDialog.newInstance(review))
+        val dialog: DialogFragment = ReviewDialog.newInstance(review)
+        dialog.show(supportFragmentManager, DIALOG_REVIEW)
     }
 
     // ================== From Person Details page navigation
@@ -105,5 +108,6 @@ class MainActivity : AppCompatActivity(), HomeNavigation, MovieDetailsNavigation
 
     companion object {
         private const val BACK_STACK = "back_stack"
+        private const val DIALOG_REVIEW = "dialog_review"
     }
 }
