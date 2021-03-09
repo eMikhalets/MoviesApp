@@ -13,12 +13,14 @@
     <style name="App" />
 
     <style name="App.RatingBar">
-        <item name="android:progressDrawable">@drawable/abs_ratingbar_custom</item>
-        <item name="android:indeterminateDrawable">@drawable/abs_ratingbar_custom</item>
+        <item name="android:progressDrawable">@drawable/ratingbar_custom</item>
+        <item name="android:indeterminateDrawable">@drawable/ratingbar_custom</item>
         <item name="android:minHeight">24dp</item>
         <item name="android:maxHeight">24dp</item>
         <item name="android:isIndicator">true</item>
         <item name="android:thumb">@null</item>
+        <item name="android:numStars">5</item>
+        <item name="android:stepSize">10</item>
     </style>
 
     <style name="App.AgeRating">

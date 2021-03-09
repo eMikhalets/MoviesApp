@@ -44,7 +44,7 @@ class ReviewDialog : DialogFragment() {
                 textName.text = it.author
                 textRating.text = getString(
                         R.string.text_rating,
-                        it.author_details.rating?.toInt()
+                        it.author_details.rating
                 )
                 textUpdated.text = formatDate(it.updated_at)
                 textContent.text = it.content
