@@ -2,7 +2,6 @@ package com.emikhalets.moviesapp.view
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.emikhalets.moviesapp.databinding.FragmentHomeBinding
-import com.emikhalets.moviesapp.utils.CustomSearchTextListener
-import com.emikhalets.moviesapp.utils.HomeNavigation
-import com.emikhalets.moviesapp.utils.HomeState
-import com.emikhalets.moviesapp.utils.MovieQueries
+import com.emikhalets.moviesapp.utils.*
 import com.emikhalets.moviesapp.view.adapters.HomePersonAdapter
 import com.emikhalets.moviesapp.view.adapters.MoviesListAdapter
 import com.emikhalets.moviesapp.view.adapters.MoviesPagerAdapter
@@ -100,11 +96,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initRecyclerAdapters() {
-        val imageCornerRadius = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                2f,
-                resources.displayMetrics
-        )
+        val imageCornerRadius = imageCornerValue(resources)
         searchAdapter = MoviesPagerAdapter(imageCornerRadius) { onSearchMovieClick(it) }
         personsAdapter = HomePersonAdapter(imageCornerRadius) { onPopArtistClick(it) }
         moviesPopularAdapter = MoviesListAdapter(imageCornerRadius) { onMovieClick(it) }

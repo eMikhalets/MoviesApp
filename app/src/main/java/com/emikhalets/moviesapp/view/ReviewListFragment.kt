@@ -1,7 +1,6 @@
 package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import com.emikhalets.moviesapp.databinding.FragmentReviewsListBinding
 import com.emikhalets.moviesapp.model.pojo.ResultReview
 import com.emikhalets.moviesapp.utils.ReviewListNavigation
+import com.emikhalets.moviesapp.utils.imageCornerValue
 import com.emikhalets.moviesapp.view.adapters.ReviewsAdapter
 import com.emikhalets.moviesapp.viewmodel.ReviewListViewModel
 
@@ -27,9 +27,9 @@ class ReviewListFragment : Fragment() {
     private val reviewsViewModel: ReviewListViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentReviewsListBinding.inflate(inflater, container, false)
         return binding.root
@@ -64,11 +64,7 @@ class ReviewListFragment : Fragment() {
     }
 
     private fun initRecyclerAdapters() {
-        val imageCornerRadius = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            2f,
-            resources.displayMetrics
-        )
+        val imageCornerRadius = imageCornerValue(resources)
         reviewsAdapter = ReviewsAdapter(imageCornerRadius) { onReviewClick(it) }
 
         with(binding) {

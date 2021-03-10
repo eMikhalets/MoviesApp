@@ -1,13 +1,11 @@
 package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
@@ -15,10 +13,7 @@ import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.FragmentMovieDetailsBinding
 import com.emikhalets.moviesapp.model.pojo.ResponseMovieId
 import com.emikhalets.moviesapp.model.pojo.ResultReview
-import com.emikhalets.moviesapp.utils.MovieDetailsNavigation
-import com.emikhalets.moviesapp.utils.buildBackdrop780px
-import com.emikhalets.moviesapp.utils.buildPoster185px
-import com.emikhalets.moviesapp.utils.formatImagesList
+import com.emikhalets.moviesapp.utils.*
 import com.emikhalets.moviesapp.view.adapters.CastAdapter
 import com.emikhalets.moviesapp.view.adapters.MoviesListAdapter
 import com.emikhalets.moviesapp.view.adapters.ReviewsAdapter
@@ -55,6 +50,8 @@ class MovieDetailsFragment : Fragment() {
                 val movieId = it.getInt(MOVIE_ID)
                 movieDetailsViewModel.loadMovieData(movieId)
             }
+        } else {
+            binding.scrollMovie.scrollTo(movieDetailsViewModel.scrollPos, movieDetailsViewModel.scrollPos)
         }
 
         with(movieDetailsViewModel) {
@@ -79,6 +76,7 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        movieDetailsViewModel.scrollPos = binding.scrollMovie.scrollY
         binding.listCast.adapter = null
         binding.listReviews.adapter = null
         binding.listSimilarMovies.adapter = null
@@ -86,11 +84,7 @@ class MovieDetailsFragment : Fragment() {
     }
 
     private fun initRecyclerAdapters() {
-        val imageCornerRadius = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                2f,
-                resources.displayMetrics
-        )
+        val imageCornerRadius = imageCornerValue(resources)
         castAdapter = CastAdapter(imageCornerRadius) { onCastClick(it) }
         reviewsAdapter = ReviewsAdapter(imageCornerRadius) { onReviewClick(it) }
         moviesSimilarAdapter = MoviesListAdapter(imageCornerRadius) { onSimilarMovieClick(it) }
@@ -138,18 +132,16 @@ class MovieDetailsFragment : Fragment() {
 
     private fun setData(data: ResponseMovieId) {
         with(binding) {
-            imageBackdrop.load(data.backdrop_path?.let { buildBackdrop780px(it) }) {
-                fallback(R.drawable.ph_backdrop)
+            data.backdrop_path?.let { img ->
+                imageBackdrop.load(buildBackdrop780px(img)) { fallback(R.drawable.ph_backdrop) }
+                imageBackdrop.setOnClickListener { onImageClick(img) }
             }
-            imagePoster.load(data.poster_path?.let { buildPoster185px(it) }) {
-                fallback(R.drawable.ph_poster)
+            data.poster_path?.let { img ->
+                imagePoster.load(buildPoster185px(img)) { fallback(R.drawable.ph_poster) }
+                imagePoster.setOnClickListener { onImageClick(img) }
             }
             textName.text = data.title
-            val certification = data.certification
-            if (certification.isNotEmpty()) {
-                textAgeRating.text = data.certification
-                textAgeRating.isVisible = true
-            }
+            textAgeRating.text = setCertification(data.certification)
             textYear.text = movieDetailsViewModel.parseYear(data.release_date)
             ratingBar.rating = (data.vote_average / 2).toFloat()
             textRating.text = getString(
@@ -171,9 +163,16 @@ class MovieDetailsFragment : Fragment() {
                     R.string.variable_money,
                     data.revenue
             )
+        }
+    }
 
-            imageBackdrop.setOnClickListener { data.backdrop_path?.let { img -> onImageClick(img) } }
-            imagePoster.setOnClickListener { data.poster_path?.let { img -> onImageClick(img) } }
+    private fun setCertification(cert: String): String {
+        return if (cert.isNotEmpty()) {
+            binding.textAgeRating.visibility = View.VISIBLE
+            cert
+        } else {
+            binding.textAgeRating.visibility = View.GONE
+            ""
         }
     }
 

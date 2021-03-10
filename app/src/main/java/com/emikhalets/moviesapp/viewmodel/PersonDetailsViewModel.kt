@@ -24,6 +24,8 @@ class PersonDetailsViewModel : ViewModel() {
     private val _notice = MutableLiveData<String>()
     val notice get(): LiveData<String> = _notice
 
+    var scrollPos = 0
+
     @SuppressLint("NullSafeMutableLiveData")
     fun loadPersonData(personId: Int) {
         viewModelScope.launch {

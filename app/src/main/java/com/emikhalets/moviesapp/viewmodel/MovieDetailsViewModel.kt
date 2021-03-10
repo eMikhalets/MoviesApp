@@ -34,6 +34,7 @@ class MovieDetailsViewModel : ViewModel() {
     val notice get(): LiveData<String> = _notice
 
     var id = -1
+    var scrollPos = 0
 
     @SuppressLint("NullSafeMutableLiveData")
     fun loadMovieData(movieId: Int) {

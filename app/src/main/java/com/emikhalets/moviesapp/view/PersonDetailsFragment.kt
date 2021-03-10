@@ -48,6 +48,8 @@ class PersonDetailsFragment : Fragment() {
                 val personId = it.getInt(PERSON_ID)
                 personDetailsViewModel.loadPersonData(personId)
             }
+        } else {
+            binding.scrollMovie.scrollTo(personDetailsViewModel.scrollPos, personDetailsViewModel.scrollPos)
         }
 
         with(personDetailsViewModel) {
@@ -55,9 +57,7 @@ class PersonDetailsFragment : Fragment() {
                 setData(personData)
                 imagesAdapter?.submitList(personData.images.profiles)
             })
-            uiVisibility.observe(viewLifecycleOwner, { isDataLoaded ->
-                setInterfaceVisibility(isDataLoaded)
-            })
+            uiVisibility.observe(viewLifecycleOwner, { setInterfaceVisibility(it) })
             notice.observe(viewLifecycleOwner, { msg ->
                 Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
             })
@@ -66,6 +66,7 @@ class PersonDetailsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        personDetailsViewModel.scrollPos = binding.scrollMovie.scrollY
         binding.listImages.adapter = null
         _binding = null
     }
@@ -90,27 +91,30 @@ class PersonDetailsFragment : Fragment() {
 
     private fun setData(data: ResponsePersonId) {
         with(binding) {
-            imagePerson.load(data.profile_path?.let { buildProfile185px(it) }) {
-                fallback(R.drawable.ph_actor)
+            data.profile_path?.let { img ->
+                imagePerson.load(buildProfile185px(img)) { fallback(R.drawable.ph_actor) }
+                imagePerson.setOnClickListener { onImageClick(img) }
             }
             textName.text = data.name
             textDepartment.text = data.known_for_department
             textBirthday.text = getString(
                     R.string.variable_birthday,
-                    data.birthday
+                    formatData(data.birthday)
             )
             textDeathday.text = getString(
                     R.string.variable_deathday,
-                    data.deathday
+                    formatData(data.deathday)
             )
             textPlaceBirth.text = getString(
                     R.string.variable_place_birth,
-                    data.place_of_birth
+                    formatData(data.place_of_birth)
             )
             textBiographyContent.text = data.biography
-
-            imagePerson.setOnClickListener { data.profile_path?.let { img -> onImageClick(img) } }
         }
+    }
+
+    private fun formatData(data: String?): String {
+        return data ?: "-"
     }
 
     private fun setInterfaceVisibility(bool: Boolean) {

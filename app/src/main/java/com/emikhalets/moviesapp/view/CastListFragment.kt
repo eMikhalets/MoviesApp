@@ -1,7 +1,6 @@
 package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.emikhalets.moviesapp.databinding.FragmentPersonListBinding
 import com.emikhalets.moviesapp.utils.PersonListNavigation
+import com.emikhalets.moviesapp.utils.imageCornerValue
 import com.emikhalets.moviesapp.view.adapters.CastAdapter
 import com.emikhalets.moviesapp.view.adapters.CrewAdapter
 import com.emikhalets.moviesapp.viewmodel.CastPagerViewModel
@@ -39,13 +39,9 @@ class CastListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imageCornerRadius = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                2f,
-                resources.displayMetrics
-        )
         arguments?.let {
             val castType = it.getInt(CAST_TYPE)
+            val imageCornerRadius = imageCornerValue(resources)
             if (castType == 0) initCastAdapter(imageCornerRadius)
             else initCrewAdapter(imageCornerRadius)
         }

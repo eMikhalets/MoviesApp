@@ -1,7 +1,6 @@
 package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.emikhalets.moviesapp.databinding.FragmentMoviesListBinding
 import com.emikhalets.moviesapp.utils.MovieQueries
 import com.emikhalets.moviesapp.utils.MoviesListNavigation
+import com.emikhalets.moviesapp.utils.imageCornerValue
 import com.emikhalets.moviesapp.view.adapters.MoviesPagerAdapter
 import com.emikhalets.moviesapp.viewmodel.MoviesPagerViewModel
 
@@ -26,9 +26,9 @@ class MovieListFragment : Fragment() {
     private val moviesPagerViewModel: MoviesPagerViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMoviesListBinding.inflate(inflater, container, false)
         return binding.root
@@ -57,11 +57,7 @@ class MovieListFragment : Fragment() {
     }
 
     private fun initRecyclerAdapter() {
-        val imageCornerRadius = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            2f,
-            resources.displayMetrics
-        )
+        val imageCornerRadius = imageCornerValue(resources)
         moviesAdapter = MoviesPagerAdapter(imageCornerRadius) { onMovieClick(it) }
         binding.listMovies.apply {
             setHasFixedSize(true)

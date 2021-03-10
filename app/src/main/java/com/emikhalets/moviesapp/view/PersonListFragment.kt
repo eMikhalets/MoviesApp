@@ -1,7 +1,6 @@
 package com.emikhalets.moviesapp.view
 
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.emikhalets.moviesapp.databinding.FragmentPersonListBinding
 import com.emikhalets.moviesapp.utils.PersonListNavigation
+import com.emikhalets.moviesapp.utils.imageCornerValue
 import com.emikhalets.moviesapp.view.adapters.PopPersonListAdapter
 import com.emikhalets.moviesapp.viewmodel.PersonListViewModel
 
@@ -24,9 +24,9 @@ class PersonListFragment : Fragment() {
     private val popPersonViewModel: PersonListViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPersonListBinding.inflate(inflater, container, false)
         return binding.root
@@ -52,11 +52,7 @@ class PersonListFragment : Fragment() {
     }
 
     private fun initRecyclerAdapter() {
-        val imageCornerRadius = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            2f,
-            resources.displayMetrics
-        )
+        val imageCornerRadius = imageCornerValue(resources)
         personAdapter = PopPersonListAdapter(imageCornerRadius) { onCastClickClick(it) }
         binding.listPerson.apply {
             setHasFixedSize(true)
