@@ -31,9 +31,6 @@ fun buildPoster780px(path: String) = "https://image.tmdb.org/t/p/w780/$path"
  */
 fun buildProfile185px(path: String) = "https://image.tmdb.org/t/p/w185/$path"
 
-/**
- * Builds a url to request profile of movie with width = 185 px
- */
 suspend fun <T> safeNetworkCall(call: suspend () -> T): ApiResult<T> =
         try {
             val result = call.invoke()
