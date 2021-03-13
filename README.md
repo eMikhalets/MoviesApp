@@ -1,5 +1,3 @@
-app for discover movies and persons
-
 # MoviesApp ![Logo](/app/src/main/res/mipmap-xxhdpi/ic_app_icon.png)
 
 ## Android application for viewing films on The Movies Database API ##
