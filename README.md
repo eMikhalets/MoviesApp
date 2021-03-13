@@ -8,8 +8,8 @@ This example implements browsing movies and actors, using [The Movie Database AP
 
 1. Browsing popular persons and popular, top rated, uncoming, now playing movies;
 2. Search by movie name;
-3. Browing movie details such as cast, crew, reviews, similar movies;
-4. Browing person details;
+3. Browsing movie details such as cast, crew, reviews, similar movies;
+4. Browsing person details;
 5. Night theme.
 
 ## Used libraries ##
