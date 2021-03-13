@@ -49,8 +49,11 @@ class PopPersonListAdapter(
         }
 
         private fun getGender(intGender: Int): String {
-            return if (intGender == 0) "Male"
-            else "Female"
+            return when (intGender) {
+                1 -> "Female"
+                2 -> "Male"
+                else -> "-"
+            }
         }
 
         companion object {
