@@ -26,8 +26,8 @@ object ApiFactory {
 
     private val httpClient = OkHttpClient.Builder()
         .connectTimeout(10, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(10, TimeUnit.SECONDS)
         .addInterceptor(logInterceptor)
         .addInterceptor(ApiKeyInterceptor())
         .addNetworkInterceptor(logInterceptor)

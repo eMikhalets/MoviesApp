@@ -46,8 +46,6 @@ class MovieDetailsViewModel : ViewModel() {
                     _movie.postValue(response.result)
                 }
                 is ApiResult.Error -> _notice.postValue(response.msg)
-                ApiResult.Loading -> {
-                }
             }
         }
     }
@@ -67,8 +65,6 @@ class MovieDetailsViewModel : ViewModel() {
         when (val response = repository.requestCredits(id)) {
             is ApiResult.Success -> _cast.postValue(response.result.cast.take(3))
             is ApiResult.Error -> _notice.postValue(response.msg)
-            ApiResult.Loading -> {
-            }
         }
     }
 
@@ -76,8 +72,6 @@ class MovieDetailsViewModel : ViewModel() {
         when (val response = repository.requestReviews(id)) {
             is ApiResult.Success -> _reviews.postValue(response.result.results.take(3))
             is ApiResult.Error -> _notice.postValue(response.msg)
-            ApiResult.Loading -> {
-            }
         }
     }
 
@@ -85,8 +79,6 @@ class MovieDetailsViewModel : ViewModel() {
         when (val response = repository.requestMoviesSimilar(id)) {
             is ApiResult.Success -> _moviesSimilar.postValue(response.result.results)
             is ApiResult.Error -> _notice.postValue(response.msg)
-            ApiResult.Loading -> {
-            }
         }
     }
 

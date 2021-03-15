@@ -37,8 +37,6 @@ class CastPagerViewModel : ViewModel() {
                     _uiVisibility.postValue(true)
                 }
                 is ApiResult.Error -> _notice.postValue(response.msg)
-                ApiResult.Loading -> {
-                }
             }
         }
     }

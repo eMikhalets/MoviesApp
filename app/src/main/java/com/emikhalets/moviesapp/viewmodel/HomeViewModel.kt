@@ -77,8 +77,6 @@ class HomeViewModel : ViewModel() {
                 if (++dataCounter >= 5) _visibility.postValue(HomeState.DEFAULT)
             }
             is ApiResult.Error -> _notice.postValue(response.msg)
-            ApiResult.Loading -> {
-            }
         }
     }
 
@@ -89,8 +87,6 @@ class HomeViewModel : ViewModel() {
                 if (++dataCounter >= 5) _visibility.postValue(HomeState.DEFAULT)
             }
             is ApiResult.Error -> _notice.postValue(response.msg)
-            ApiResult.Loading -> {
-            }
         }
     }
 
@@ -101,8 +97,6 @@ class HomeViewModel : ViewModel() {
                 if (++dataCounter >= 5) _visibility.postValue(HomeState.DEFAULT)
             }
             is ApiResult.Error -> _notice.postValue(response.msg)
-            ApiResult.Loading -> {
-            }
         }
     }
 
@@ -113,8 +107,6 @@ class HomeViewModel : ViewModel() {
                 if (++dataCounter >= 5) _visibility.postValue(HomeState.DEFAULT)
             }
             is ApiResult.Error -> _notice.postValue(response.msg)
-            ApiResult.Loading -> {
-            }
         }
     }
 
@@ -125,8 +117,6 @@ class HomeViewModel : ViewModel() {
                 if (++dataCounter >= 5) _visibility.postValue(HomeState.DEFAULT)
             }
             is ApiResult.Error -> _notice.postValue(response.msg)
-            ApiResult.Loading -> {
-            }
         }
     }
 }

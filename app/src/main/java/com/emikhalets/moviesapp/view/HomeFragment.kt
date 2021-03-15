@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.emikhalets.moviesapp.R
 import com.emikhalets.moviesapp.databinding.FragmentHomeBinding
 import com.emikhalets.moviesapp.utils.*
 import com.emikhalets.moviesapp.view.adapters.HomePersonAdapter
@@ -37,9 +37,9 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -51,8 +51,8 @@ class HomeFragment : Fragment() {
         initRecyclerAdapters()
         if (savedInstanceState == null) {
             homeViewModel.isNightMode = requireActivity()
-                    .getSharedPreferences(SP_NAME, Activity.MODE_PRIVATE)
-                    .getBoolean(SP_THEME, false)
+                .getSharedPreferences(SP_NAME, Activity.MODE_PRIVATE)
+                .getBoolean(SP_THEME, false)
             homeViewModel.loadData()
         }
 
@@ -65,14 +65,15 @@ class HomeFragment : Fragment() {
             moviesTopRated.observe(viewLifecycleOwner, { moviesTopRatedAdapter?.submitList(it) })
             moviesUpcoming.observe(viewLifecycleOwner, { moviesUpcomingAdapter?.submitList(it) })
             visibility.observe(viewLifecycleOwner, { setInterfaceVisibility(it) })
-            notice.observe(viewLifecycleOwner, { msg ->
-                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+            notice.observe(viewLifecycleOwner, {
+                binding.textError.text = it
+                updateVisibility(HomeState.ERROR)
             })
         }
 
         with(binding) {
             val closeSearchId = searchView.context.resources
-                    .getIdentifier("android:id/search_close_btn", null, null)
+                .getIdentifier("android:id/search_close_btn", null, null)
             val closeSearch = searchView.findViewById<ImageView>(closeSearchId)
             searchView.setOnQueryTextListener(onSearchClick())
             closeSearch.setOnClickListener { onCloseListener() }
@@ -133,11 +134,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun onThemeChangeClick() {
+        requireActivity().window.setWindowAnimations(R.style.ThemeChangingAnim)
         val isNightMode = homeViewModel.isNightMode
         if (isNightMode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         requireActivity().getSharedPreferences(SP_NAME, Activity.MODE_PRIVATE).edit()
-                .putBoolean(SP_THEME, isNightMode).apply()
+            .putBoolean(SP_THEME, isNightMode).apply()
     }
 
     private fun onSearchClick(): SearchView.OnQueryTextListener {
@@ -186,24 +188,30 @@ class HomeFragment : Fragment() {
     }
 
     private fun setInterfaceVisibility(state: HomeState) {
-        when (state) {
-            HomeState.DEFAULT -> {
-                with(binding) {
+        with(binding) {
+
+            when (state) {
+                HomeState.DEFAULT -> {
                     scrollView.visibility = View.VISIBLE
+                    textError.visibility = View.GONE
                     listSearch.visibility = View.GONE
                     pbLoadingData.visibility = View.GONE
                 }
-            }
-            HomeState.SEARCH -> {
-                with(binding) {
+                HomeState.SEARCH -> {
                     listSearch.visibility = View.VISIBLE
+                    textError.visibility = View.GONE
                     scrollView.visibility = View.GONE
                     pbLoadingData.visibility = View.GONE
                 }
-            }
-            HomeState.LOADING -> {
-                with(binding) {
+                HomeState.LOADING -> {
                     pbLoadingData.visibility = View.VISIBLE
+                    textError.visibility = View.GONE
+                    listSearch.visibility = View.GONE
+                    scrollView.visibility = View.GONE
+                }
+                HomeState.ERROR -> {
+                    textError.visibility = View.VISIBLE
+                    pbLoadingData.visibility = View.GONE
                     listSearch.visibility = View.GONE
                     scrollView.visibility = View.GONE
                 }
