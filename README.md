@@ -14,6 +14,12 @@ Used architecture pattern - Model-View-ViewModel
 4. Browsing person details;
 5. Night theme.
 
+## Install ##
+
+1. Download apk file from [app/release/app-release.apk](app/release/app-release.apk);
+2. Allow third-party apps to be installed on your android phone;
+3. Install apk.
+
 ## Used libraries ##
 
 1. [Paging 2](https://developer.android.com/jetpack/androidx/releases/paging) for browsing persons and movies;
